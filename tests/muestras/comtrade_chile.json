@@ -1,0 +1,77 @@
+{
+ "count": 9,
+ "data": [
+  {
+   "reporterCode": 152,
+   "partnerCode": 0,
+   "refYear": 2021,
+   "cmdCode": "282520",
+   "primaryValue": 95647936.0,
+   "netWgt": 11264319.0
+  },
+  {
+   "reporterCode": 152,
+   "partnerCode": 0,
+   "refYear": 2021,
+   "cmdCode": "283691",
+   "primaryValue": 885203178.0,
+   "netWgt": 134060077.0
+  },
+  {
+   "reporterCode": 152,
+   "partnerCode": 0,
+   "refYear": 2022,
+   "cmdCode": "283691",
+   "primaryValue": 8258836778.97,
+   "netWgt": 198631380.0
+  },
+  {
+   "reporterCode": 152,
+   "partnerCode": 0,
+   "refYear": 2022,
+   "cmdCode": "282520",
+   "primaryValue": 585228729.871,
+   "netWgt": 15213149.0
+  },
+  {
+   "reporterCode": 152,
+   "partnerCode": 0,
+   "refYear": 2023,
+   "cmdCode": "283691",
+   "primaryValue": 4240538590.58,
+   "netWgt": 188519852.0
+  },
+  {
+   "reporterCode": 152,
+   "partnerCode": 0,
+   "refYear": 2023,
+   "cmdCode": "282520",
+   "primaryValue": 833390350.41,
+   "netWgt": 23016467.6
+  },
+  {
+   "reporterCode": 152,
+   "partnerCode": 0,
+   "refYear": 2024,
+   "cmdCode": "282520",
+   "primaryValue": 196655271.16,
+   "netWgt": 21125109.0
+  },
+  {
+   "reporterCode": 152,
+   "partnerCode": 0,
+   "refYear": 2024,
+   "cmdCode": "283691",
+   "primaryValue": 2325804634.64,
+   "netWgt": 233703629.0
+  },
+  {
+   "reporterCode": 152,
+   "partnerCode": 32,
+   "refYear": 2024,
+   "cmdCode": "282520",
+   "primaryValue": 997480.0,
+   "netWgt": 59000.0
+  }
+ ]
+}

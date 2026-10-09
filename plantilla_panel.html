@@ -1,0 +1,246 @@
+<title>CritMine · Datos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: panel de datos CritMine — mástil, fichas de último precio, gráfico principal de cobre, pares de gráficos plata/oro, bloque de litio Chile con gráfico y tabla */
+:root{
+  --salt:#F3F5F4; --paper:#FFFFFF; --basalt:#17212A; --muted:#5C6A72; --line:#D9DFDD; --grid:#E8ECEB;
+  --brine:#1D6E6B; --copper:#A4532B;
+  --s1:#008F86; --s2:#B5552A;           /* series validadas (carbonato / hidróxido, plata-oro / cobre) */
+  --up:#1F7A4D; --down:#B0303F;
+  --f-display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --f-body:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-data:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --salt:#10171C;--paper:#162027;--basalt:#E6ECEA;--muted:#9AA9B0;--line:#2A3740;--grid:#22303A;
+  --brine:#5FC2BB;--copper:#DE8B5F;--s1:#2AA89F;--s2:#D9723F;--up:#5BC08A;--down:#E77683;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --salt:#10171C;--paper:#162027;--basalt:#E6ECEA;--muted:#9AA9B0;--line:#2A3740;--grid:#22303A;
+  --brine:#5FC2BB;--copper:#DE8B5F;--s1:#2AA89F;--s2:#D9723F;--up:#5BC08A;--down:#E77683;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--salt);color:var(--basalt);font-family:var(--f-body);font-size:16px;line-height:1.6;padding-inline:20px;padding-block:0 64px}
+.wrap{max-width:1080px;margin:0 auto}
+a{color:var(--brine);text-underline-offset:3px}
+h1,h2,h3{text-wrap:balance;font-weight:400}
+.mast{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;padding-block:28px 22px;border-bottom:1px solid var(--basalt)}
+.brand-name{font-family:var(--f-display);font-size:34px;line-height:1}
+.brand-name i{color:var(--brine)}
+.brand-tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.stamp{font-family:var(--f-data);font-size:12px;color:var(--muted);text-align:right}
+.hero{padding-block:40px 28px}
+.hero h1{font-family:var(--f-display);font-size:clamp(30px,4.6vw,46px);line-height:1.1;margin:0 0 10px}
+.hero p{margin:0;color:var(--muted);max-width:64ch}
+
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line);background:var(--paper)}
+.tile{padding:18px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;gap:4px;min-width:0}
+.tile .lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tile .px{font-family:var(--f-data);font-size:28px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1.2}
+.tile .u,.tile .alt{font-family:var(--f-data);font-size:12px;color:var(--muted)}
+.chg{font-family:var(--f-data);font-size:13px}
+.chg.up{color:var(--up)}.chg.dn{color:var(--down)}
+
+section{padding-block:44px;border-bottom:1px solid var(--line)}
+.sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
+section h2{font-family:var(--f-display);font-size:clamp(24px,3vw,32px);margin:0;line-height:1.15}
+.src{font-family:var(--f-data);font-size:12px;color:var(--muted)}
+.lead{margin:6px 0 18px;max-width:66ch}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.pair h3{font-family:var(--f-body);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;font-weight:500}
+.chart{position:relative;min-width:0}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{font-family:var(--f-data);font-size:11px;fill:var(--muted)}
+.chart .lab{fill:var(--basalt);font-weight:500}
+.tip{position:absolute;pointer-events:none;background:var(--basalt);color:var(--salt);font-family:var(--f-data);font-size:12px;padding:6px 9px;white-space:nowrap;transform:translate(-50%,-115%);opacity:0;transition:opacity .1s}
+.tip.on{opacity:1}
+.legend{display:flex;gap:18px;font-size:13px;margin:0 0 8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:12px;height:12px;border-radius:2px;display:inline-block}
+
+.tbl{overflow-x:auto;background:var(--paper);border:1px solid var(--line);margin-top:22px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:620px}
+th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:right;padding:10px 14px;border-bottom:1px solid var(--basalt);white-space:nowrap}
+th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}
+td{padding:10px 14px;border-bottom:1px solid var(--line);text-align:right;font-family:var(--f-data);font-variant-numeric:tabular-nums;white-space:nowrap}
+td:nth-child(2){font-family:var(--f-body)}
+tr:last-child td{border-bottom:0}
+.note{font-size:14px;color:var(--muted);max-width:72ch;margin:14px 0 0}
+.foot{padding-block:24px 0;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+@media (max-width:760px){.tiles{grid-template-columns:1fr}.pair{grid-template-columns:1fr;gap:28px}.stamp{text-align:left}}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div><div class="brand-name">Crit<i>Mine</i> · Datos</div><div class="brand-tag">Minerales críticos para la transición energética · Latinoamérica</div></div>
+    <div class="stamp" id="stamp"></div>
+  </header>
+
+  <div class="hero">
+    <h1>Precios de metales y exportaciones de litio, desde fuentes públicas</h1>
+    <p>Se actualiza solo con el conector de CritMine: Banco Central de Reserva del Perú para los precios y UN Comtrade para el comercio exterior.</p>
+  </div>
+
+  <div class="tiles" id="tiles"></div>
+
+  <section>
+    <div class="sec-head"><h2>Cobre LME, promedio mensual</h2><span class="src">US$/t · BCRP</span></div>
+    <p class="lead" id="cu-lead"></p>
+    <div class="chart" id="ch-cu"></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Plata y oro, promedio mensual</h2><span class="src">US$/oz troy · BCRP</span></div>
+    <div class="pair">
+      <div><h3>Plata</h3><div class="chart" id="ch-ag"></div></div>
+      <div><h3>Oro</h3><div class="chart" id="ch-au"></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>Chile: valor unitario de sus exportaciones de litio</h2><span class="src">US$/t · UN Comtrade</span></div>
+    <p class="lead" id="li-lead"></p>
+    <div class="legend"><span><i style="background:var(--s1)"></i>Carbonato (HS 283691)</span><span><i style="background:var(--s2)"></i>Óxido e hidróxido (HS 282520)</span></div>
+    <div class="chart" id="ch-li"></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Año</th><th>Producto</th><th>Toneladas</th><th>Valor (US$ M)</th><th>US$/t</th></tr></thead>
+      <tbody id="li-rows"></tbody>
+    </table></div>
+    <p class="note">El valor unitario es el valor declarado dividido por el peso neto exportado. Sirve como referencia del precio realizado, no como precio spot.</p>
+  </section>
+
+  <section id="sec-cl" hidden>
+    <div class="sec-head"><h2>Chile: series del Banco Central</h2><span class="src">Banco Central de Chile · BDE</span></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Serie</th><th>Código</th><th>Último valor</th><th>Fecha</th><th>Unidad</th></tr></thead>
+      <tbody id="cl-rows"></tbody>
+    </table></div>
+  </section>
+
+  <footer class="foot"><span>CritMine · critmine.com</span><span id="foot-src"></span></footer>
+</div>
+
+<script>
+const DATOS = /*DATOS*/null/*FIN*/;
+
+const fmt = (v, d=0) => v.toLocaleString('es-CL', {minimumFractionDigits:d, maximumFractionDigits:d});
+const MES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+const fMes = f => { const [y,m] = f.split('-'); return MES[+m-1] + ' ' + y.slice(2); };
+const fDia = f => { const [y,m,d] = f.split('-'); return +d + ' ' + MES[+m-1] + ' ' + y; };
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const NS = 'http://www.w3.org/2000/svg';
+const el = (t, a={}, p) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+
+function niceTicks(min, max, n=4){
+  const span = max - min, step0 = span / n, mag = Math.pow(10, Math.floor(Math.log10(step0)));
+  const step = [1,2,2.5,5,10].map(s => s*mag).find(s => span/s <= n) || 10*mag;
+  const lo = Math.floor(min/step)*step, hi = Math.ceil(max/step)*step, t = [];
+  for (let v = lo; v <= hi + step/2; v += step) t.push(+v.toFixed(6));
+  return t;
+}
+
+function lineChart(id, serie, color, dec, unidad){
+  const box = document.getElementById(id); box.innerHTML = '';
+  if (!serie.length) { box.textContent = 'Sin datos todavía.'; return; }
+  const big = id === 'ch-cu', W = big ? 960 : 480, H = big ? 320 : 240, m = {t:16, r:big ? 70 : 60, b:28, l:big ? 58 : 50};
+  const vals = serie.map(p => p.valor), ticks = niceTicks(Math.min(...vals), Math.max(...vals));
+  const y0 = ticks[0], y1 = ticks[ticks.length-1];
+  const x = i => m.l + i * (W - m.l - m.r) / (serie.length - 1);
+  const y = v => m.t + (1 - (v - y0)/(y1 - y0)) * (H - m.t - m.b);
+  const svg = el('svg', {viewBox:`0 0 ${W} ${H}`, role:'img', 'aria-label': `${unidad}, ${serie.length} meses`}, box);
+  ticks.forEach(t => { el('line', {x1:m.l, x2:W-m.r, y1:y(t), y2:y(t), stroke:'var(--grid)', 'stroke-width':1}, svg);
+    el('text', {x:m.l-8, y:y(t)+4, 'text-anchor':'end'}, svg).textContent = fmt(t, t < 100 ? 0 : 0); });
+  serie.forEach((p,i) => { if (p.fecha.endsWith('-01')) el('text', {x:x(i), y:H-8, 'text-anchor':'middle'}, svg).textContent = p.fecha.slice(0,4); });
+  const pts = serie.map((p,i) => `${x(i)},${y(p.valor)}`).join(' ');
+  el('polygon', {points:`${m.l},${y(y0)} ${pts} ${x(serie.length-1)},${y(y0)}`, fill:color, 'fill-opacity':.08}, svg);
+  el('polyline', {points:pts, fill:'none', stroke:color, 'stroke-width':2, 'stroke-linejoin':'round'}, svg);
+  const last = serie[serie.length-1];
+  el('circle', {cx:x(serie.length-1), cy:y(last.valor), r:4.5, fill:color, stroke:'var(--paper)', 'stroke-width':2}, svg);
+  el('text', {x:x(serie.length-1)+10, y:y(last.valor)+4, class:'lab'}, svg).textContent = fmt(last.valor, dec);
+  // capa de hover
+  const cross = el('line', {y1:m.t, y2:H-m.b, stroke:'var(--muted)', 'stroke-width':1, opacity:0}, svg);
+  const dot = el('circle', {r:5, fill:color, stroke:'var(--paper)', 'stroke-width':2, opacity:0}, svg);
+  const tip = document.createElement('div'); tip.className = 'tip'; box.appendChild(tip);
+  const hit = el('rect', {x:m.l, y:0, width:W-m.l-m.r, height:H, fill:'transparent'}, svg);
+  const mover = ev => {
+    const r = svg.getBoundingClientRect(), sx = (ev.clientX - r.left) * W / r.width;
+    const i = Math.max(0, Math.min(serie.length-1, Math.round((sx - m.l) / ((W-m.l-m.r)/(serie.length-1)))));
+    const p = serie[i]; cross.setAttribute('x1', x(i)); cross.setAttribute('x2', x(i)); cross.setAttribute('opacity', .5);
+    dot.setAttribute('cx', x(i)); dot.setAttribute('cy', y(p.valor)); dot.setAttribute('opacity', 1);
+    tip.textContent = `${fMes(p.fecha)} · ${fmt(p.valor, dec)} ${unidad}`;
+    tip.style.left = (x(i) * r.width / W) + 'px'; tip.style.top = (y(p.valor) * r.height / H) + 'px'; tip.classList.add('on');
+  };
+  hit.addEventListener('pointermove', mover);
+  hit.addEventListener('pointerleave', () => { tip.classList.remove('on'); cross.setAttribute('opacity',0); dot.setAttribute('opacity',0); });
+}
+
+function barsLitio(filas){
+  const box = document.getElementById('ch-li'); box.innerHTML = '';
+  if (!filas.length) { box.textContent = 'Sin datos todavía.'; return; }
+  const anios = [...new Set(filas.map(f => f.anio))].sort();
+  const series = [['283691','var(--s1)'],['282520','var(--s2)']];
+  const W = 960, H = 280, m = {t:24, r:16, b:30, l:62};
+  const max = Math.max(...filas.map(f => f.precio_unitario_usd_t || 0)), ticks = niceTicks(0, max);
+  const y = v => m.t + (1 - v/ticks[ticks.length-1]) * (H - m.t - m.b);
+  const gw = (W - m.l - m.r) / anios.length, bw = Math.min(56, gw*0.3);
+  const svg = el('svg', {viewBox:`0 0 ${W} ${H}`, role:'img', 'aria-label':'Valor unitario US$/t por año'}, box);
+  ticks.forEach(t => { el('line', {x1:m.l, x2:W-m.r, y1:y(t), y2:y(t), stroke:'var(--grid)'}, svg);
+    el('text', {x:m.l-8, y:y(t)+4, 'text-anchor':'end'}, svg).textContent = fmt(t); });
+  const tip = document.createElement('div'); tip.className = 'tip'; box.appendChild(tip);
+  anios.forEach((a, gi) => {
+    const cx = m.l + gw*gi + gw/2;
+    el('text', {x:cx, y:H-8, 'text-anchor':'middle'}, svg).textContent = a;
+    series.forEach(([hs, col], si) => {
+      const f = filas.find(r => r.anio === a && r.hs === hs); if (!f || !f.precio_unitario_usd_t) return;
+      const bx = cx + (si === 0 ? -bw - 1 : 1), by = y(f.precio_unitario_usd_t), bh = y(0) - by;
+      const r = Math.min(4, bw/2);
+      el('path', {d:`M${bx},${y(0)} V${by+r} Q${bx},${by} ${bx+r},${by} H${bx+bw-r} Q${bx+bw},${by} ${bx+bw},${by+r} V${y(0)} Z`, fill:col}, svg);
+      const hit = el('rect', {x:bx-2, y:m.t, width:bw+4, height:H-m.t-m.b, fill:'transparent'}, svg);
+      hit.addEventListener('pointerenter', ev => {
+        tip.textContent = `${f.producto} ${a} · ${fmt(f.precio_unitario_usd_t)} US$/t · ${fmt(f.toneladas)} t`;
+        const rr = svg.getBoundingClientRect(); tip.style.left = ((bx+bw/2)*rr.width/W)+'px'; tip.style.top = (by*rr.height/H)+'px'; tip.classList.add('on'); });
+      hit.addEventListener('pointerleave', () => tip.classList.remove('on'));
+    });
+  });
+  el('line', {x1:m.l, x2:W-m.r, y1:y(0), y2:y(0), stroke:'var(--muted)'}, svg);
+}
+
+function render(D){
+  if (!D) return;
+  document.getElementById('stamp').innerHTML = 'Actualizado<br>' + fDia(D.generado.slice(0,10));
+  document.getElementById('foot-src').textContent = 'Fuentes: ' + Object.values(D.fuentes).join(' · ');
+  const metales = [['cobre','Cobre LME','US$/t',0],['plata','Plata','US$/oz',2],['oro','Oro','US$/oz',2]];
+  document.getElementById('tiles').innerHTML = metales.map(([k, nom, u, d]) => {
+    const s = D[k], ult = s.ultimo, prev = s.mensual.length ? s.mensual[s.mensual.length-1] : null;
+    if (!ult) return `<div class="tile"><span class="lbl">${nom}</span><span class="px">—</span><span class="u">sin dato</span></div>`;
+    let chg = '';
+    if (prev && prev.fecha !== ult.fecha.slice(0,7)) { const p = (ult.valor/prev.valor - 1)*100;
+      chg = `<span class="chg ${p>=0?'up':'dn'}">${p>=0?'▲':'▼'} ${fmt(Math.abs(p),1)}% vs promedio ${fMes(prev.fecha)}</span>`; }
+    const alt = k === 'cobre' ? `<span class="alt">${fmt(ult.valor/22.0462262, 0)} cUS$/lb</span>` : '';
+    return `<div class="tile"><span class="lbl">${nom}</span><span class="px">${fmt(ult.valor, d)}</span><span class="u">${u} · ${fDia(ult.fecha)}</span>${alt}${chg}</div>`;
+  }).join('');
+  const cu = D.cobre.mensual;
+  if (cu.length > 12) { const a = cu[cu.length-1], b = cu[cu.length-13];
+    document.getElementById('cu-lead').textContent = `El promedio de ${fMes(a.fecha)} fue ${fmt(a.valor)} US$/t, ${fmt((a.valor/b.valor-1)*100,0)}% sobre el de ${fMes(b.fecha)}.`; }
+  lineChart('ch-cu', cu, 'var(--s2)', 0, 'US$/t');
+  lineChart('ch-ag', D.plata.mensual, 'var(--s1)', 2, 'US$/oz');
+  lineChart('ch-au', D.oro.mensual, 'var(--s1)', 0, 'US$/oz');
+  const li = D.litio_exportaciones.filter(f => f.pais === 'Chile');
+  barsLitio(li);
+  document.getElementById('li-rows').innerHTML = [...li].sort((a,b) => b.anio - a.anio || a.hs.localeCompare(b.hs)).map(f =>
+    `<tr><td>${f.anio}</td><td>${f.producto}</td><td>${f.toneladas!=null?fmt(f.toneladas):'—'}</td><td>${fmt(f.valor_musd,1)}</td><td>${f.precio_unitario_usd_t!=null?fmt(f.precio_unitario_usd_t):'—'}</td></tr>`).join('');
+  const cl = D.chile_bcch || [];
+  if (cl.length) { document.getElementById('sec-cl').hidden = false;
+    document.getElementById('cl-rows').innerHTML = cl.map(r => `<tr><td>${r.nombre}</td><td>${r.id}</td><td>${fmt(r.ultimo.valor, 2)}</td><td>${fDia(r.ultimo.fecha)}</td><td>${r.unidad}</td></tr>`).join(''); }
+  const c = li.filter(f => f.hs === '283691').sort((a,b) => a.anio - b.anio);
+  if (c.length >= 2) { const mx = c.reduce((a,b) => b.precio_unitario_usd_t > a.precio_unitario_usd_t ? b : a), u = c[c.length-1];
+    document.getElementById('li-lead').textContent = `El carbonato chileno se exportó a ${fmt(u.precio_unitario_usd_t)} US$/t en ${u.anio}, frente al máximo de ${fmt(mx.precio_unitario_usd_t)} US$/t en ${mx.anio}, con ${fmt(u.toneladas)} t embarcadas.`; }
+}
+
+// En el sitio: si no hay datos incrustados, lee datos/datos.json (lo actualiza el conector)
+if (DATOS) render(DATOS);
+else fetch('datos/datos.json', {cache:'no-store'}).then(r => r.json()).then(render)
+  .catch(() => { document.getElementById('tiles').innerHTML = '<div class="tile"><span class="lbl">Sin datos</span><span class="u">No se pudo leer datos/datos.json</span></div>'; });
+</script>

@@ -1,0 +1,155 @@
+seriesId,frecuencia,titulo,ultima_observacion
+F089.EOF.FI_TC_CU.MS.D,DAILY,"Evolución encuesta de operadores financieros (EOF), Factores de incidencia en Tipo de Cambio: Cobre",03-09-2026
+F068.B1.FLU.A1.0.C.N.Z.Z.Z.Z.6.0.D,DAILY,"Balanza de pagos, exportaciones, mineras, cobre, flujo semanal",30-09-2026
+F068.B1.FLU.A2.0.C.N.Z.Z.Z.Z.6.0.D,DAILY,"Balanza de pagos, exportaciones, mineras, cobre, cátodos, flujo semanal",30-09-2026
+F068.B1.FLU.A3.0.C.N.Z.Z.Z.Z.6.0.D,DAILY,"Balanza de pagos, exportaciones, mineras, cobre, concentrados, flujo semanal",30-09-2026
+F068.B1.FLU.C62.0.C.N.Z.Z.Z.Z.6.0.D,DAILY,"Balanza de pagos, exportaciones,Industria metalica basica, alambre de cobre",30-09-2026
+F019.PPB.PRE.100.D,DAILY,Precio del cobre refinado BML (dólares/libra) | Diario ,13-10-2026
+F061.1AA01311.FLU.C.USD.Z.M,MONTHLY,"Exportaciones cobre, 1996-2011(FOB)",01-02-2012
+F061.1AA0133601.FLU.C.USD.Z.M,MONTHLY,"Exportaciones alambre de cobre, 1996-2011 (FOB)",01-02-2012
+F068.B1.FLU.A1.0.C.N.Z.Z.Z.Z.6.0.M,MONTHLY,"Exportaciones FOB, Mineras, Cobre (millones de dólares)",01-09-2026
+F068.B1.FLU.C62.0.C.N.Z.Z.Z.Z.6.0.M,MONTHLY,"Balanza de pagos, bienes , exportaciones, industria metálica basica, alambre de cobre",01-09-2026
+F029.DER.FLU.CBMSC.M,MONTHLY,"Derivados de cobre, en el mercado externo. Monto Suscrito",01-12-2025
+F029.DER.FLU.CBVSC.M,MONTHLY,"Derivados de cobre, en el mercado externo. Volumen Suscrito (Miles de toneladas métricas)",01-12-2025
+F029.DER.STO.CBMVC.M,MONTHLY,"Derivados de cobre, en el mercado externo. Monto Vigente",01-12-2025
+F029.DER.STO.CBVVC.M,MONTHLY,"Derivados de cobre, en el mercado externo. Volumen Vigente (Miles de toneladas métricas)",01-12-2025
+F051.A012.FLU.C.C.CLP.M,MONTHLY,"Ingresos de cobre bruto del gobierno central, base caja mensual",01-12-2005
+F051.A012.FLU.C.D.CLP.M,MONTHLY,"Gobierno central presupuestario, ingresos de cobre bruto devengado",01-08-2026
+F051.AT012.FLU.C.D.CLP.M,MONTHLY,"Gobierno central total, ingresos de cobre bruto devengado",01-08-2026
+F051.AX012.FLU.C.D.CLP.M,MONTHLY,"Gobierno central extrapresupuestario, ingresos de cobre bruto devengado",01-08-2026
+F075.IPP.IND.P055.200304.Z.M,MONTHLY,IPP Indice de la serie de cobre,01-12-2011
+F075.IPP.IND.P349.200304.Z.M,MONTHLY,IPP Indice de la serie de tubos o canos de cobre,01-12-2011
+F075.IPP.IND.P365.200304.Z.M,MONTHLY,IPP Indice de la serie de articulos domesticos y sus partes y piezas de hierro acero cobre o aluminio,01-12-2011
+F075.IPP.IND.P366.200304.Z.M,MONTHLY,IPP Indice de la serie de estropajos y almohadillas para fregar o pulir ollas guantes y articulos analogos de hierro acero cobre o aluminio lana de hierro o acero,01-12-2011
+F075.IPP.IND.P376.200304.Z.M,MONTHLY,IPP Indice de la serie de tornillos pernos tuercas ganchos de tornillos niples coplas flanges y articulos analogos de hierro acero cobre o aluminio,01-12-2011
+F075.IPP.IND.P377.200304.Z.M,MONTHLY,IPP Indice de la serie de clavostachuelas grapas excepto grapas en tiras remaches chabetas arandelas y articulos analogos de hierro acero cobre o aluminio,01-12-2011
+F032.PIB.FLU.R.CLP.2008.03.05.0.M,MONTHLY,"PIB   Minería del cobre, volumen a precios año anterior encadenado, referencia 2008,  Mensual",01-09-2016
+F032.PIB.FLU.R.CLP.2008.03.05.1.M,MONTHLY,"PIB   Minería del cobre, volumen a precios año anterior encadenado, desestacionalizada, referencia 2008,  Mensual",01-09-2016
+F032.PIB.FLU.R.CLP.2013.03.05.0.M,MONTHLY,"PIB   Minería del cobre, volumen a precios año anterior encadenado, referencia 2013,  Mensual (miles de millones de pesos encadenados)",01-09-2021
+F032.PIB.FLU.R.CLP.2013.03.05.1.M,MONTHLY,"PIB  MinerÍa del cobre, volumen a precios año anterior encadenado, desestacionalizada, referencia 2013,  Mensual (miles de millones de pesos encadenados)",01-09-2021
+F032.PIB.FLU.R.CLP.2018.03.05.0.M,MONTHLY,"PIB   Minería del cobre, volumen a precios año anterior encadenado, referencia 2018,  Mensual (miles de millones de pesos encadenados)",01-06-2026
+F032.PIB.FLU.R.CLP.2018.03.05.1.M,MONTHLY,"PIB  MinerÍa del cobre, volumen a precios año anterior encadenado, desestacionalizada, referencia 2018,  Mensual (miles de millones de pesos encadenados)",01-06-2026
+F076.IPM.IND.1C13200101.200711.Z.M,MONTHLY,COBRE,01-12-2011
+F076.IPM.IND.1D27200101.200711.Z.M,MONTHLY,TUBOS O CAÑOS DE COBRE,01-12-2011
+F076.IPM.IND.1D28990101.200711.Z.M,MONTHLY,"ARTICULOS DOMESTICOS Y SUS PARTES Y PIEZAS, DE HIERRO, ACERO, COBRE O ALUMINIO",01-12-2011
+F076.IPM.IND.1D28990102.200711.Z.M,MONTHLY,"ESTROPAJOS Y ALMOHADILLAS PARA FREGAR O PULIR OLLAS, GUANTES Y ARTICULOS ANALOGOS DE HIERRO, ACERO, COBRE O ALUMINIO; LANA DE HIERRO O ACERO",01-12-2011
+F076.IPM.IND.1D28990601.200711.Z.M,MONTHLY,"TORNILLOS, PERNOS, TUERCAS, GANCHOS DE TORNILLOS, NIPLES, COPLAS, FLANGES, Y ARTICULOS ANALOGOS, DE HIERRO, ACERO, COBRE O ALUMINIO",01-12-2011
+F076.IPM.IND.1D28990602.200711.Z.M,MONTHLY,"CLAVOS,TACHUELAS, GRAPAS (EXCEPTO GRAPAS EN TIRAS), REMACHES, CHABETAS, ARANDELAS Y ARTICULOS ANALOGOS DE HIERRO, ACERO, COBRE O ALUMINIO",01-12-2011
+F076.IPM.IND.2D27200401.200711.Z.M,MONTHLY,IPM TUBOS Y CAÑOS  DE COBRE REFINADO,01-12-2011
+F076.IPM.IND.2D27200402.200711.Z.M,MONTHLY,IPM ACCESORIOS PARA TUBOS Y CAÑOS DE ALEACIONES DE COBRE,01-12-2011
+F034.ECUM.FAA.COCHILCO.Z.0.M,MONTHLY,"Exportación de cobre, de mina acumulado, COCHILCO (miles de toneladas de fino)",01-07-2026
+F034.ECUM.FLU.COCHILCO.Z.0.M,MONTHLY,"Exportación de cobre, COCHILCO (miles de toneladas de fino)",01-07-2026
+F034.PCUM.FAA.COCHILCO.Z.0.M,MONTHLY,"Producción cobre de mina, acumulado, COCHILCO (miles de toneladas de fino)",01-07-2026
+F034.PCUM.FLU.COCHILCO.Z.0.M,MONTHLY,"Producción cobre de mina, COCHILCO (miles de toneladas)",01-07-2026
+F019.PPB.PRE.40.M,MONTHLY,"Precio del cobre refinado BML (dólares/libra) (valores referenciales, obtenidas de fuentes internacionales para apoyo al análisis económico)",01-09-2026
+F061.1AA01311.INC.C.Z.Z.T,QUARTERLY,"Índice de cantidad exportaciones cobre trimestrales, 1996-2011 (base 2003=100)",01-07-2011
+F061.1AA01311.INP.C.Z.Z.T,QUARTERLY,"Índice de precios exportaciones cobre trimestrales, 1996-2011 (base 2003=100)",01-07-2011
+F068.U23.INC.A1.0.C.Z.Z.Z.Z.Z.18.0.T,QUARTERLY,Indice de cantidad exportaciones cobre trimestrales (base 2018=100),01-04-2026
+F068.U23.INC.A1.0.C.Z.Z.Z.Z.Z.6.0.T,QUARTERLY,Indice de cantidad exportaciones cobre trimestrales (base 2008=100),01-07-2016
+F068.U23.INC.A1B.0.C.Z.Z.Z.Z.Z.18.0.T,QUARTERLY,"Indice de cantidad de exportaciones trimestrales, Cobre sin refinar (base 2018=100)",01-04-2026
+F068.U23.INP.A1.0.C.Z.Z.Z.Z.Z.18.0.T,QUARTERLY,Índice de precios Exportaciones cobre trimestrales (base 2018=100),01-04-2026
+F068.U23.INP.A1.0.C.Z.Z.Z.Z.Z.6.0.T,QUARTERLY,Índice de precios Exportaciones cobre trimestrales (base 2008=100),01-07-2016
+F068.U23.INP.A1B.0.C.Z.Z.Z.Z.Z.18.0.T,QUARTERLY,"Índices de precios de exportaciones trimestrales, Cobre sin refinar (base 2018=100)",01-04-2026
+F068.U23.INV.A1.0.C.Z.Z.Z.Z.Z.18.0.T,QUARTERLY,"Índice de valor de exportaciones bienes trimestrales, Cobre (base 2018=100)",01-04-2026
+F068.U23.INV.A1B.0.C.Z.Z.Z.Z.Z.18.0.T,QUARTERLY,"Índice de valor de exportaciones bienes trimestrales, Cobre sin refinar (base 2018=100)",01-04-2026
+F051.A012.FLU.C.C.CLP.T,QUARTERLY,"Ingresos de cobre bruto del gobierno central, base caja trimestral",01-10-2005
+F051.A012.FLU.G.C.CLP.T,QUARTERLY,"Gobierno general total, ingresos de cobre bruto devengado",01-04-2026
+F051.AT012.FLU.M.D.CLP.T,QUARTERLY,Cobre bruto,01-04-2026
+F051.C17.STO.C.Z.USD.T,QUARTERLY,Fondo de Compensación del Cobre (saldo); estado de fondos especiales (millones de dólares); ; stock; trimestral; ; ; ; ,01-04-2026
+F051.C17D.STO.C.Z.USD.T,QUARTERLY,Fondo de Compensación del Cobre (diferencia); estado de fondos especiales (millones de dólares); ; stock; trimestral; ; ; ; ,01-04-2026
+F032.PIB.DEF.N.CLP.2008.03.05.0.T,QUARTERLY,"Deflactor PIB minería del cobre trimestral, referencia 2008",01-07-2016
+F032.PIB.DEF.N.CLP.EP08.03.05.0.T,QUARTERLY,"Deflactor del producto interno bruto por clase de actividad económica, trimestral, series empalmadas, referencia 2008, Minería, Minería del cobre",01-07-2016
+F032.PIB.DEF.N.CLP.EP13.03.05.0.T,QUARTERLY,"Deflactor del producto interno bruto por clase de actividad económica, trimestral, series empalmadas, referencia 2013, Minería, Minería del cobre",01-07-2021
+F032.PIB.DEF.N.CLP.EP13.03.05.1.T,QUARTERLY,"Deflactor del producto interno bruto por clase de actividad económica, trimestral, series empalmadas, desestacionalizado, referencia 2013, Minería, Minería del cobre",01-07-2021
+F032.PIB.DEF.N.CLP.EP18.03.05.0.T,QUARTERLY,"Deflactor del producto interno bruto por clase de actividad económica, trimestral, series empalmadas, referencia 2018, Minería, Minería del cobre",01-04-2026
+F032.PIB.DEF.N.CLP.EP18.03.05.1.T,QUARTERLY,"Deflactor del producto interno bruto por clase de actividad económica, trimestral, series empalmadas, desestacionalizado, referencia 2018, Minería, Minería del cobre",01-04-2026
+F032.PIB.DEF.Z.CLP.1996.03.05.0.T,QUARTERLY,Deflactor PIB minería del cobre trimestral base 1996,01-10-2003
+F032.PIB.FLU.N.CLP.1996.03.05.0.T,QUARTERLY,PIB Minería del cobre a precios corrientes base 1996,01-07-2006
+F032.PIB.FLU.N.CLP.2003.03.05.0.T,QUARTERLY,PIB Minería del cobre a precios corrientes base 2003,01-07-2011
+F032.PIB.FLU.N.CLP.2003.03.Z.0.T,QUARTERLY,PIB Minería del cobre a precios corrientes base 2003,01-07-2011
+F032.PIB.FLU.N.CLP.2008.03.05.0.T,QUARTERLY,"PIB Minería del cobre a precios corrientes, referencia 2008 ",01-07-2016
+F032.PIB.FLU.N.CLP.EP08.03.05.0.T,QUARTERLY,"PIB Minería del cobre a precios corrientes, series empalmadas, referencia 2008",01-07-2016
+F032.PIB.FLU.N.CLP.EP13.03.05.0.T,QUARTERLY,"PIB Minería del cobre a precios corrientes, series empalmadas, referencia 2013 (miles de millones de pesos)",01-07-2021
+F032.PIB.FLU.N.CLP.EP13.03.05.1.T,QUARTERLY,"PIB Minería del cobre a precios corrientes, series empalmadas, desestacionalizado, referencia 2013 (miles de millones de pesos)",01-07-2021
+F032.PIB.FLU.N.CLP.EP18.03.05.0.T,QUARTERLY,"PIB Minería del cobre a precios corrientes, series empalmadas, referencia 2018 (miles de millones de pesos)",01-04-2026
+F032.PIB.FLU.N.CLP.EP18.03.05.1.T,QUARTERLY,"PIB Minería del cobre a precios corrientes, series empalmadas, desestacionalizado, referencia 2018 (miles de millones de pesos)",01-04-2026
+F032.PIB.FLU.R.CLP.1996.03.05.0.T,QUARTERLY,PIB Minería del cobre a precios constantes base 1996,01-07-2006
+F032.PIB.FLU.R.CLP.2003.03.05.0.T,QUARTERLY,PIB Minería del cobre a precios constantes base 2003,01-07-2011
+F032.PIB.FLU.R.CLP.2008.03.05.0.T,QUARTERLY,"PIB Minería del cobre , volumen a precios del año anterior encadenado, referencia 2008 ",01-07-2016
+F032.PIB.FLU.R.CLP.2008.03.05.3.T,QUARTERLY,"PIB Minería del cobre , volumen a precios del año anterior encadenado, desestacionalizado, referencia 2008 (Millones de pesos)",01-07-2016
+F032.PIB.FLU.R.CLP.EP08.03.05.0.T,QUARTERLY,"PIB Minería del cobre , volumen a precios del año anterior encadenado, series empalmadas, referencia 2008",01-07-2016
+F032.PIB.FLU.R.CLP.EP08.03.05.3.T,QUARTERLY,"PIB Minería del cobre , volumen a precios del año anterior encadenado, series empalmadas, desestacionalizado, referencia 2008",01-07-2016
+F032.PIB.FLU.R.CLP.EP13.03.05.0.T,QUARTERLY,"PIB Minería del cobre , volumen a precios del año anterior encadenado, series empalmadas, referencia 2013 (miles de millones de pesos encadenados)",01-07-2021
+F032.PIB.FLU.R.CLP.EP13.03.05.3.T,QUARTERLY,"PIB Minería del cobre , volumen a precios del año anterior encadenado, series empalmadas, desestacionalizado, referencia 2013 (miles de millones de pesos encadenados)",01-07-2021
+F032.PIB.FLU.R.CLP.EP18.03.05.0.T,QUARTERLY,"PIB Minería del cobre , volumen a precios del año anterior encadenado, series empalmadas, referencia 2018 (miles de millones de pesos encadenados)",01-04-2026
+F032.PIB.FLU.R.CLP.EP18.03.05.3.T,QUARTERLY,"PIB Minería del cobre , volumen a precios del año anterior encadenado, series empalmadas, desestacionalizado, referencia 2018 (miles de millones de pesos encadenados)",01-04-2026
+F032.PIB.V12.R.Z.2008.03.05.0.T,QUARTERLY,"PIB Minería del cobre , contribución porcentual respecto de igual periodo del año anterior, referencia 2008 ",01-07-2016
+F032.PIB.V12.R.Z.2008.03.05.3.T,QUARTERLY,"PIB Minería del cobre , contribución porcentual respecto de igual periodo del año anterior, desestacionalizado, referencia 2008",01-07-2016
+F032.PIB.V12.R.Z.2013.03.05.0.T,QUARTERLY,"PIB Minería del cobre , contribución porcentual respecto de igual periodo del año anterior, referencia 2013 ",01-07-2021
+F032.PIB.V12.R.Z.2013.03.05.3.T,QUARTERLY,"PIB Minería del cobre , contribución porcentual respecto de igual periodo del año anterior, desestacionalizado, referencia 2013",01-07-2021
+F032.PIB.V12.R.Z.2018.03.05.0.T,QUARTERLY,"PIB Minería del cobre , contribución porcentual respecto de igual periodo del año anterior, referencia 2018",01-04-2026
+F032.PIB.V12.R.Z.2018.03.05.3.T,QUARTERLY,"PIB Minería del cobre , contribución porcentual respecto de igual periodo del año anterior, desestacionalizado, referencia 2018",01-04-2026
+F032.PIB.VAR.R.Z.2008.03.05.3.T,QUARTERLY,"PIB Minería del cobre, contribución porcentual respecto al periodo anterior, desestacionalizado, referencia 2008",01-07-2016
+F032.PIB.VAR.R.Z.2013.03.05.3.T,QUARTERLY,"PIB Minería del cobre, contribución porcentual respecto al periodo anterior, desestacionalizado, referencia 2013",01-07-2021
+F032.PIB.VAR.R.Z.2018.03.05.3.T,QUARTERLY,"PIB Minería del cobre, contribución porcentual respecto al periodo anterior, desestacionalizado, referencia 2018",01-04-2026
+F033.XCO.DEF.Z.CLP.1996.0.T,QUARTERLY,Deflactor exportación cobre trimestral año base 1996,01-10-2003
+F033.XCO.DEF.Z.CLP.2003.0.T,QUARTERLY,Deflactor exportación cobre trimestral base 2003,01-07-2011
+F033.XCO.DEF.Z.CLP.2008.0.T,QUARTERLY,"Deflactor exportación cobre trimestral, referencia 2008",01-07-2016
+F033.XCO.DEF.Z.CLP.2013.0.T,QUARTERLY,"Deflactor exportación cobre trimestral, referencia 2013",01-07-2021
+F033.XCO.DEF.Z.CLP.2018.0.T,QUARTERLY,"Deflactor exportación cobre trimestral, referencia 2018",01-04-2026
+F033.XCO.FLU.N.CLP.1996.0.T,QUARTERLY,Exportación cobre a precios corrientes base 1996 ,01-07-2006
+F033.XCO.FLU.N.CLP.2003.0.T,QUARTERLY,Exportación cobre a precios corrientes base 2003,01-07-2011
+F033.XCO.FLU.N.CLP.2008.0.T,QUARTERLY,"Exportación cobre a precios corrientes, referencia 2008 ",01-07-2016
+F033.XCO.FLU.N.CLP.2013.0.T,QUARTERLY,"Exportación cobre a precios corrientes, referencia 2013  (miles de millones de pesos) ",01-07-2021
+F033.XCO.FLU.N.CLP.2018.0.T,QUARTERLY,"Exportación cobre a precios corrientes, referencia 2018  (miles de millones de pesos)",01-04-2026
+F033.XCO.FLU.R.CLP.1996.0.T,QUARTERLY,Exportación cobre a precios constantes base 1996,01-07-2006
+F033.XCO.FLU.R.CLP.2003.0.T,QUARTERLY,Exportación cobre a precios constantes base 2003,01-07-2011
+F033.XCO.FLU.R.CLP.2008.0.T,QUARTERLY,"Exportación cobre volumen a precios del año anterior encadenado, referencia 2008",01-07-2016
+F033.XCO.FLU.R.CLP.2013.0.T,QUARTERLY,"Exportación cobre volumen a precios del año anterior encadenado, referencia 2013 (miles de millones de pesos encadenados)",01-07-2021
+F033.XCO.FLU.R.CLP.2018.0.T,QUARTERLY,"Exportación cobre volumen a precios del año anterior encadenado, referencia 2018 (miles de millones de pesos encadenados)",01-04-2026
+F033.XCO.V12.R.Z.2008.0.T,QUARTERLY,"Exportación cobre contribución porcentual respecto de igual periodo del año anterior, referencia 2008",01-07-2016
+F033.XCO.V12.R.Z.2013.0.T,QUARTERLY,"Exportación cobre contribución porcentual respecto de igual periodo del año anterior, referencia 2013",01-07-2021
+F033.XCO.V12.R.Z.2018.0.T,QUARTERLY,"Exportación cobre contribución porcentual respecto de igual periodo del año anterior, referencia 2018",01-04-2026
+F061.1AA01311.INC.C.Z.Z.A,ANNUAL,"Índice de cantidad exportaciones cobre anuales, 1996-2011 (base 2003=100)",01-01-2010
+F061.1AA01311.INP.C.Z.Z.A,ANNUAL,"Índice de precios exportaciones cobre anuales, 1996-2011 (base 2003=100)",01-01-2010
+F061.9MM1A11.FAA.C.USD.Z.A,ANNUAL,"Balanza de Pagos (1973-1995),  Cuenta Corriente   Bienes, servicios y rentas, Balanza comercial, Exportaciones fob Cobre",01-01-2005
+F061.9MN111.FAA.C.USD.Z.A,ANNUAL,"Balanza de Pagos  (1960-1979),  Balanza Comercial Exportaciones FOB Tradicionales Cobre",01-01-2005
+F061.H60831AA01311.FLU.C.USD.Z.A,ANNUAL,Exportaciones de bienes (1960-1983)   Mineros  Cobre,01-01-1983
+F061.H73851AA0125.FLU.D.USD.ICU.A,ANNUAL,Importaciones (1973-1985)  Bienes intermedios Gran minería del cobre,01-01-1976
+F061.H84891AA01311.FLU.C.USD.Z.A,ANNUAL,Exportaciones de bienes (1984-1989)   Mineros   Cobre,01-01-1989
+F061.H89951AA0.FAA.C.USD.Z.A,ANNUAL,Exportaciones de bienes (1989-1995)   Total exportaciones no cobre,01-01-1995
+F061.H89951AA01311.FLU.C.USD.Z.A,ANNUAL,Exportaciones de bienes (1989-1995)   Mineros   Cobre,01-01-1995
+F061.H89951AA0133601.FLU.C.USD.Z.A,ANNUAL,Exportaciones de bienes (1989-1995)   Industriales     Industria básica del hierro y del acero  Alambre de cobre (2)   Industriales ,01-01-1995
+F061.H89951AA0133606.FLU.C.USD.Z.A,ANNUAL,Exportaciones de bienes (1989-1995)   Industriales     Industria básica del hierro y del acero  Barras y perfiles de cobre,01-01-2005
+F061.H89951AA0133608.FLU.C.USD.Z.A,ANNUAL,Exportaciones de bienes (1989-1995)   Industriales     Industria básica del hierro y del acero  Tubos de cobre,01-01-2005
+F061.H89951AA0133705.FLU.C.USD.Z.A,ANNUAL,"Exportaciones de bienes (1989-1995)   Industriales     Productos metálicos, elécticos y de transporte  Alambre de cobre (2)   Industriales ",01-01-2005
+F061.H89951AA0133706.FLU.C.USD.Z.A,ANNUAL,"Exportaciones de bienes (1989-1995)   Industriales     Productos metálicos, elécticos y de transporte  Cospeles de cobre",01-01-2005
+F068.B1.STO.A1.0.C.N.Z.Z.Z.Z.6.0.A,ANNUAL,"Cobre \ Mineras  , total exportaciones, exportaciones de bienes  \ BCCh \ Anual \ Millones de dólares USA. FOB \ Stock",01-01-2025
+F068.U23.INC.A1.0.C.Z.Z.Z.Z.Z.18.0.A,ANNUAL,Indice de cantidad exportaciones cobre anuales (base 2018=100),01-01-2025
+F068.U23.INC.A1.0.C.Z.Z.Z.Z.Z.6.0.A,ANNUAL,Indice de cantidad exportaciones cobre anuales (base 2008=100),01-01-2015
+F068.U23.INC.A1B.0.C.Z.Z.Z.Z.Z.18.0.A,ANNUAL,"Indice de cantidad de exportaciones anuales, Cobre sin refinar (base 2018=100)",01-01-2025
+F068.U23.INP.A1.0.C.Z.Z.Z.Z.Z.18.0.A,ANNUAL,Índice de precios Exportaciones cobre anuales (base 2018=100),01-01-2025
+F068.U23.INP.A1.0.C.Z.Z.Z.Z.Z.6.0.A,ANNUAL,Índice de precios Exportaciones cobre anuales (base 2008=100),01-01-2015
+F068.U23.INP.A1B.0.C.Z.Z.Z.Z.Z.18.0.A,ANNUAL,"Índices de precios de exportaciones anuales, Cobre sin refinar (base 2018=100)",01-01-2025
+F051.A012.FLU.C.C.CLP.A,ANNUAL,"Ingresos de cobre bruto del gobierno central, base caja, anual",01-01-2005
+F051.A012.FLU.C.D.CLP.A,ANNUAL,"Finanzas Públicas, Gobierno Central Total, Operaciones no financieras, Ingresos de cobre bruto devengado, millones de pesos chilenos, Anual",01-01-2025
+F032.PIB.DEF.N.CLP.2008.03.05.0.A,ANNUAL,"Deflactor PIB minería del cobre anual, referencia 2008",01-01-2015
+F032.PIB.DEF.N.CLP.EP08.03.05.0.A,ANNUAL,"Deflactor del producto interno bruto por clase de actividad económica, anual, series empalmadas, referencia 2008, Minería, Minería del cobre",01-01-2015
+F032.PIB.DEF.N.CLP.EP13.03.05.0.A,ANNUAL,"Deflactor del producto interno bruto por clase de actividad económica, anual, series empalmadas, referencia 2013, Minería, Minería del cobre",01-01-2020
+F032.PIB.DEF.N.CLP.EP18.03.05.0.A,ANNUAL,"Deflactor del producto interno bruto por clase de actividad económica, anual, series empalmadas, referencia 2018, Minería, Minería del cobre",01-01-2025
+F032.PIB.DEF.Z.CLP.1996.03.05.0.A,ANNUAL,Deflactor PIB minería del cobre anual base 1996,01-01-2003
+F032.PIB.RPA.N.Z.EP13.03.05.0.A,ANNUAL,"Minería del cobre, ratio del pib, por clase de actividad económica, referencia 2013, series empalmadas",01-01-2020
+F032.PIB.RPA.N.Z.EP18.03.05.0.A,ANNUAL,"Minería del cobre, ratio del pib, por clase de actividad económica, referencia 2018, series empalmadas",01-01-2025
+F032.PIB.V12.R.Z.2008.03.05.0.A,ANNUAL,"PIB Minería del cobre , contribución porcentual respecto de igual periodo del año anterior, referencia 2008 ",01-01-2015
+F032.PIB.V12.R.Z.2013.03.05.0.A,ANNUAL,"PIB Minería del cobre , contribución porcentual respecto de igual periodo del año anterior, referencia 2013 ",01-01-2020
+F032.PIB.V12.R.Z.2018.03.05.0.A,ANNUAL,"PIB Minería del cobre , contribución porcentual respecto de igual periodo del año anterior, referencia 2018",01-01-2025
+F033.XCO.DEF.Z.CLP.1996.0.A,ANNUAL,Deflactor exportación cobre anual año base 1996,01-01-2003
+F033.XCO.DEF.Z.CLP.2003.0.A,ANNUAL,Deflactor exportación cobre anual base 2003,01-01-2010
+F033.XCO.DEF.Z.CLP.2008.0.A,ANNUAL,"Deflactor exportación cobre anual, referencia 2008",01-01-2015
+F033.XCO.DEF.Z.CLP.2013.0.A,ANNUAL,"Deflactor exportación cobre anual, referencia 2013",01-01-2020
+F033.XCO.DEF.Z.CLP.2018.0.A,ANNUAL,"Deflactor exportación cobre anual, referencia 2018",01-01-2025
+F033.XCO.RPA.N.Z.2013.0.A,ANNUAL,"Ratio Exportación cobre a precios corrientes, como porcentaje del PIB a precios corrientes, referencia 2013",01-01-2020
+F033.XCO.RPA.N.Z.2018.0.A,ANNUAL,"Ratio Exportación cobre a precios corrientes, como porcentaje del PIB a precios corrientes, referencia 2018",01-01-2025
+F033.XCO.V12.R.Z.2008.0.A,ANNUAL,"Exportación cobre contribución porcentual respecto de igual periodo del año anterior, referencia 2008",01-01-2015
+F033.XCO.V12.R.Z.2013.0.A,ANNUAL,"Exportación cobre contribución porcentual respecto de igual periodo del año anterior, referencia 2013",01-01-2020
+F033.XCO.V12.R.Z.2018.0.A,ANNUAL,"Exportación cobre contribución porcentual respecto de igual periodo del año anterior, referencia 2018",01-01-2025
