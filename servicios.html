@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CritMine · Servicios</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: misma hoja de mercado del informe — mástil, tesis, cobertura en fichas de elemento, servicios en filas con rótulo lateral, proceso, contacto */
+:root{
+  --salt:#F3F5F4; --paper:#FFFFFF; --basalt:#17212A; --muted:#5C6A72; --line:#D9DFDD;
+  --brine:#1D6E6B; --brine-soft:#E2EEEC;
+  --f-display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --f-body:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-data:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --salt:#10171C;--paper:#162027;--basalt:#E6ECEA;--muted:#9AA9B0;--line:#2A3740;--brine:#5FC2BB;--brine-soft:#18302F;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --salt:#10171C;--paper:#162027;--basalt:#E6ECEA;--muted:#9AA9B0;--line:#2A3740;--brine:#5FC2BB;--brine-soft:#18302F;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--salt);color:var(--basalt);font-family:var(--f-body);font-size:16px;line-height:1.6;padding-inline:20px;padding-block:0 64px}
+.wrap{max-width:1080px;margin:0 auto}
+a{color:var(--brine);text-decoration-thickness:1px;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--brine);outline-offset:2px}
+h1,h2,h3{text-wrap:balance;font-weight:400}
+
+.mast{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;padding-block:40px 28px;border-bottom:1px solid var(--basalt)}
+.brand{display:flex;align-items:center;gap:18px}
+.el{width:64px;height:64px;border:1.5px solid var(--basalt);display:grid;grid-template-rows:auto 1fr auto;padding:4px 6px;font-family:var(--f-data);font-size:10px;line-height:1.1;flex:none}
+.el b{font-family:var(--f-display);font-size:28px;font-weight:600;line-height:1;align-self:center}
+.el span:last-child{text-align:right;color:var(--muted)}
+.brand-name{font-family:var(--f-display);font-size:clamp(34px,6vw,52px);line-height:1;letter-spacing:-.01em}
+.brand-name i{color:var(--brine)}
+.brand-tag{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+nav{display:flex;flex-wrap:wrap;gap:20px;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+nav a{color:var(--basalt);text-decoration:none}
+nav a[aria-current]{color:var(--brine);border-bottom:1px solid var(--brine)}
+
+.hero{padding-block:56px 40px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:48px;align-items:end;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--brine);margin:0 0 14px}
+.hero h1{font-family:var(--f-display);font-size:clamp(34px,5.4vw,60px);line-height:1.06;margin:0}
+.hero h1 i{color:var(--brine)}
+.hero p{margin:0 0 20px;font-size:18px;color:var(--muted);max-width:46ch}
+.btn{display:inline-block;background:var(--basalt);color:var(--salt);padding:12px 22px;text-decoration:none;font-size:14px;letter-spacing:.06em;font-weight:500;border:0;cursor:pointer;font-family:var(--f-body)}
+.btn:hover{background:var(--brine)}
+.btn.ghost{background:transparent;color:var(--basalt);border:1px solid var(--basalt)}
+.btn.ghost:hover{color:var(--brine);border-color:var(--brine);background:transparent}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+
+/* Cobertura */
+.cover{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-left:1px solid var(--line);border-top:1px solid var(--line);background:var(--paper);margin-block:40px 0}
+.cv{padding:20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;gap:10px;align-content:start;min-width:0}
+.cv .el{width:56px;height:56px}
+.cv .el b{font-size:22px}
+.cv h3{font-family:var(--f-display);font-size:22px;margin:0}
+.cv p{margin:0;font-size:14px;color:var(--muted)}
+.countries{font-family:var(--f-data);font-size:12px;color:var(--basalt);letter-spacing:.04em}
+
+section{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px 48px;padding-block:52px;border-bottom:1px solid var(--line)}
+.side{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:10px}
+section h2{font-family:var(--f-display);font-size:clamp(28px,3.4vw,38px);line-height:1.12;margin:0 0 14px}
+.lead{font-size:17px;max-width:62ch;margin:0 0 28px}
+.body{min-width:0}
+
+/* Servicios */
+.svc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) 180px;gap:24px;padding-block:24px;border-top:1px solid var(--line)}
+.svc h3{font-family:var(--f-display);font-size:24px;margin:0;line-height:1.2}
+.svc .kind{display:block;font-family:var(--f-data);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--brine);margin-bottom:6px}
+.svc p{margin:0 0 8px}
+.svc ul{margin:0;padding-left:18px;font-size:14px;color:var(--muted)}
+.svc .fmt{font-family:var(--f-data);font-size:12px;color:var(--muted);display:grid;gap:4px;align-content:start}
+.svc .fmt b{color:var(--basalt);font-weight:500}
+
+/* Clientes */
+.who{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:0;border-top:1px solid var(--line)}
+.who div{padding:18px 20px 18px 0;border-bottom:1px solid var(--line)}
+.who b{display:block;font-weight:600;margin-bottom:4px}
+.who span{font-size:14px;color:var(--muted)}
+
+/* Proceso */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;counter-reset:s}
+.steps li{counter-increment:s;border-top:1.5px solid var(--basalt);padding-top:14px}
+.steps li::before{content:counter(s);display:block;font-family:var(--f-display);font-size:36px;color:var(--brine);line-height:1;margin-bottom:10px}
+.steps b{display:block;margin-bottom:4px}
+.steps span{font-size:14px;color:var(--muted)}
+
+/* Principios */
+.why{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 40px}
+.why b{display:block;font-family:var(--f-display);font-size:22px;font-weight:400;margin-bottom:6px}
+.why p{margin:0;color:var(--muted)}
+
+/* Muestra */
+.sample{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;background:var(--paper);border:1px solid var(--line);padding:24px}
+.sample p{margin:0}
+.sample .t{font-family:var(--f-display);font-size:22px;margin-bottom:4px}
+.sample .m{font-family:var(--f-data);font-size:12px;color:var(--muted)}
+
+/* Contacto */
+.contact{background:var(--basalt);color:var(--salt);padding:40px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;margin-top:52px}
+.contact h2{font-family:var(--f-display);font-size:clamp(28px,3.6vw,40px);margin:0 0 12px;line-height:1.1}
+.contact p{margin:0;opacity:.85;max-width:48ch}
+.contact .mail{font-family:var(--f-data);font-size:18px;display:block;margin:14px 0 18px;word-break:break-all;user-select:all}
+.contact .btn{background:var(--salt);color:var(--basalt)}
+.contact .btn:hover{background:var(--brine-soft)}
+.contact ul{margin:0;padding-left:18px;opacity:.85;font-size:15px}
+.copied{font-size:13px;margin-left:10px;opacity:.85}
+
+.foot{padding-block:28px 0;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+@media (max-width:980px){.cover{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:20px;padding-block:40px 32px}
+  section{grid-template-columns:1fr;padding-block:36px;gap:6px}
+  .side{padding-top:0}
+  .svc{grid-template-columns:1fr;gap:10px}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .why{grid-template-columns:1fr}
+  .sample{grid-template-columns:1fr}
+  .contact{grid-template-columns:1fr;padding:28px 22px;gap:24px}
+}
+@media (max-width:480px){.steps{grid-template-columns:1fr}.cover{grid-template-columns:1fr}}
+</style>
+
+<style>body{margin:0}</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <div class="brand">
+      <div class="el" aria-hidden="true"><span>3</span><b>Li</b><span>6,94</span></div>
+      <div>
+        <div class="brand-name">Crit<i>Mine</i></div>
+        <div class="brand-tag">Minerales críticos para la transición energética · Latinoamérica</div>
+      </div>
+    </div>
+    <nav aria-label="Secciones del sitio">
+      <a href="index.html">Inicio</a>
+      <a href="informe-2026-10-05.html">Informes</a>
+      <a href="panel.html">Datos</a>
+      <a href="servicios.html" aria-current="page">Servicios</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Inteligencia de negocios y análisis estratégico</p>
+      <h1>Cobre, litio, tierras raras y masa negra: decisiones con <i>datos verificados</i> de Latinoamérica</h1>
+    </div>
+    <div>
+      <p>Seguimos precios, proyectos, regulación y contrapartes de los minerales que mueven la electromovilidad, de los Andes a Brasil, para que compres, vendas o inviertas sabiendo con quién y a qué precio.</p>
+      <div class="ctas">
+        <a class="btn" href="#contacto">Solicitar propuesta</a>
+        <a class="btn ghost" href="#servicios">Ver servicios</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover" aria-label="Cobertura">
+    <div class="cv">
+      <div class="el" aria-hidden="true"><span>29</span><b>Cu</b><span>63,55</span></div>
+      <h3>Cobre</h3>
+      <p>Concentrado, cátodo y su cadena de valor: base de la red eléctrica y de cada vehículo eléctrico.</p>
+      <span class="countries">CL · PE · MX · AR · BR · EC</span>
+    </div>
+    <div class="cv">
+      <div class="el" aria-hidden="true"><span>3</span><b>Li</b><span>6,94</span></div>
+      <h3>Litio</h3>
+      <p>Salmuera y roca: carbonato, hidróxido, cloruro y espodumeno SC6.</p>
+      <span class="countries">CL · AR · BO · BR · PE · MX</span>
+    </div>
+    <div class="cv">
+      <div class="el" aria-hidden="true"><span>60</span><b>Nd</b><span>144,24</span></div>
+      <h3>Tierras raras</h3>
+      <p>Arcillas iónicas y concentrados mixtos, con foco en NdPr y en disprosio y terbio (Dy/Tb).</p>
+      <span class="countries">BR · CL · AR · PE</span>
+    </div>
+    <div class="cv">
+      <div class="el" aria-hidden="true"><span>27</span><b>Co</b><span>58,93</span></div>
+      <h3>Masa negra</h3>
+      <p>Reciclaje de baterías ion-litio: payables de Ni, Co y Li, plantas y flujos de exportación.</p>
+      <span class="countries">BR · CL · MX · AR · CO</span>
+    </div>
+  </div>
+
+  <section id="servicios">
+    <div class="side">Servicios</div>
+    <div class="body">
+      <h2>Cinco formas de trabajar con CritMine</h2>
+      <p class="lead">Desde un informe periódico hasta un estudio a medida. Cada entrega cita sus fuentes y separa lo verificado de lo estimado.</p>
+
+      <div class="svc">
+        <div><span class="kind">Suscripción</span><h3>Inteligencia de mercado</h3></div>
+        <div><p>Precios de referencia, noticias que mueven el mercado y alertas de oportunidades, sin tener que buscarlas.</p>
+          <ul><li>Pulso semanal e informe quincenal ampliado</li><li>Alertas de licitaciones, offtakes y nuevos productores</li><li>Historial de precios: cobre LME y cargos de tratamiento y refinación (TC/RC), carbonato, hidróxido, SC6, NdPr y masa negra</li></ul></div>
+        <div class="fmt"><b>Formato</b><span>Mensual o anual</span><span>Informe + alertas</span></div>
+      </div>
+
+      <div class="svc">
+        <div><span class="kind">Estudio</span><h3>Estudio de mercado y entrada a un país</h3></div>
+        <div><p>Para empresas que evalúan comprar, invertir u operar en Chile, Perú, Argentina, Bolivia, Brasil o México.</p>
+          <ul><li>Oferta, demanda y actores del país</li><li>Marco regulatorio y fiscal: royalty minero, RIGI, CEOL, licencias</li><li>Riesgos y escenarios</li></ul></div>
+        <div class="fmt"><b>Formato</b><span>Proyecto cerrado</span><span>Informe + presentación</span></div>
+      </div>
+
+      <div class="svc">
+        <div><span class="kind">Due diligence</span><h3>Revisión de proyectos y contrapartes</h3></div>
+        <div><p>Antes de firmar un offtake o invertir: quién es la contraparte, en qué estado está su proyecto y qué puede salir mal.</p>
+          <ul><li>Permisos, financiamiento y avance real del proyecto</li><li>Historial corporativo y socios</li><li>Señales de alerta y preguntas para la negociación</li></ul></div>
+        <div class="fmt"><b>Formato</b><span>Por contraparte</span><span>Ficha + informe</span></div>
+      </div>
+
+      <div class="svc">
+        <div><span class="kind">Mapeo</span><h3>Mapa de proveedores de masa negra</h3></div>
+        <div><p>Quién genera, recolecta y procesa baterías en desuso en la región, con qué volúmenes y bajo qué reglas.</p>
+          <ul><li>Recicladores, recolectores y generadores industriales</li><li>Química (LFP, NCM, LCO) y volúmenes estimados</li><li>Regulación de exportación y de responsabilidad del productor (Ley REP)</li></ul></div>
+        <div class="fmt"><b>Formato</b><span>Proyecto cerrado</span><span>Base de datos + informe</span></div>
+      </div>
+
+      <div class="svc">
+        <div><span class="kind">Asesoría</span><h3>Análisis regulatorio y estratégico</h3></div>
+        <div><p>Lectura experta de cambios de política que afectan su negocio, y apoyo en decisiones puntuales.</p>
+          <ul><li>Royalty minero y política del cobre, Estrategia Nacional del Litio, RIGI, política brasileña de minerales críticos</li><li>Impacto de elecciones y cambios de gobierno</li><li>Sesiones de trabajo con su equipo</li></ul></div>
+        <div class="fmt"><b>Formato</b><span>Por horas o retainer</span><span>Notas + reuniones</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="side">Para quién</div>
+    <div class="body">
+      <h2>Clientes que necesitan saber antes que el mercado</h2>
+      <div class="who">
+        <div><b>Compradores industriales</b><span>Fundiciones, fabricantes de cátodos, baterías e imanes que buscan suministro en LATAM.</span></div>
+        <div><b>Traders y brokers</b><span>Que necesitan contrapartes, precios y señales de oferta nueva.</span></div>
+        <div><b>Recicladores</b><span>Que buscan masa negra o mercados para su producto.</span></div>
+        <div><b>Inversionistas y fondos</b><span>Que evalúan proyectos, juniors o fusiones en la región.</span></div>
+        <div><b>Mineras pequeñas y medianas</b><span>De cobre, litio o tierras raras, que buscan socios, financiamiento u offtake.</span></div>
+        <div><b>Gobiernos y gremios</b><span>Que necesitan comparar políticas y la competitividad de cada país.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="side">Cómo trabajamos</div>
+    <div class="body">
+      <h2>De la pregunta a la decisión</h2>
+      <ol class="steps">
+        <li><b>Conversación inicial</b><span>Entendemos qué decisión necesita tomar y en qué plazo.</span></li>
+        <li><b>Propuesta</b><span>Alcance, entregables, fechas y honorarios por escrito.</span></li>
+        <li><b>Investigación</b><span>Fuentes públicas verificadas, documentos oficiales y contactos en terreno.</span></li>
+        <li><b>Entrega y seguimiento</b><span>Informe, presentación y una sesión para revisar conclusiones.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="side">Por qué CritMine</div>
+    <div class="body">
+      <div class="why">
+        <div><b>Neutralidad</b><p>CritMine es un medio independiente: no representa a ninguna minera ni a ningún comprador en sus análisis.</p></div>
+        <div><b>Fuentes a la vista</b><p>Cada cifra lleva su fuente y su fecha. Si no hay un dato confiable, lo decimos en lugar de estimarlo.</p></div>
+        <div><b>Foco regional</b><p>Chile, Argentina, Bolivia, Brasil, Perú y México, en español y portugués, con lectura local de la regulación.</p></div>
+        <div><b>Mirada comercial</b><p>Escribimos para quien compra y vende: precios, payables, offtakes y contrapartes, no solo titulares.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="side">Muestra de trabajo</div>
+    <div class="body">
+      <div class="sample">
+        <div>
+          <p class="t">Informe de minerales críticos LATAM · 5 oct 2026</p>
+          <p class="m">Precios, proyectos, regulación por país y oportunidades para brokers</p>
+        </div>
+        <a class="btn ghost" href="informe-2026-10-05.html">Ver informe</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="contact" id="contacto">
+    <div>
+      <h2>Cuéntenos qué decisión necesita tomar</h2>
+      <p>Respondemos con una propuesta de alcance, plazos y honorarios. La primera conversación no tiene costo.</p>
+      <span class="mail" id="mail">[correo de contacto]</span>
+      <button class="btn" type="button" id="copy">Copiar correo</button><span class="copied" id="copied" hidden>Copiado</span>
+    </div>
+    <div>
+      <p style="margin-bottom:10px">Para acelerar la propuesta, incluya:</p>
+      <ul>
+        <li>Su empresa y su rol</li>
+        <li>Mineral y país de interés</li>
+        <li>La decisión que necesita tomar</li>
+        <li>Plazo deseado</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <span>CritMine · critmine.com · Medio independiente</span>
+    <span>Los análisis de CritMine no son asesoría financiera ni de inversión.</span>
+  </footer>
+</div>
+
+<script>
+document.getElementById('copy').addEventListener('click',function(){
+  var t=document.getElementById('mail').textContent, ok=document.getElementById('copied');
+  function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r);}
+  try{navigator.clipboard.writeText(t).then(function(){ok.hidden=false;setTimeout(function(){ok.hidden=true},1800)},sel)}catch(e){sel()}
+});
+</script>
+
+</body>
+</html>

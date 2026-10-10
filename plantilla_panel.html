@@ -30,6 +30,7 @@ h1,h2,h3{text-wrap:balance;font-weight:400}
 .brand-name{font-family:var(--f-display);font-size:34px;line-height:1}
 .brand-name i{color:var(--brine)}
 .brand-tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.pnav{margin-bottom:6px}.pnav a{color:var(--brine);text-decoration:none}
 .stamp{font-family:var(--f-data);font-size:12px;color:var(--muted);text-align:right}
 .hero{padding-block:40px 28px}
 .hero h1{font-family:var(--f-display);font-size:clamp(30px,4.6vw,46px);line-height:1.1;margin:0 0 10px}
@@ -75,7 +76,7 @@ tr:last-child td{border-bottom:0}
 <div class="wrap">
   <header class="mast">
     <div><div class="brand-name">Crit<i>Mine</i> · Datos</div><div class="brand-tag">Minerales críticos para la transición energética · Latinoamérica</div></div>
-    <div class="stamp" id="stamp"></div>
+    <div class="stamp"><nav class="pnav"><a href="index.html">Inicio</a> · <a href="servicios.html">Servicios</a></nav><div id="stamp"></div></div>
   </header>
 
   <div class="hero">
@@ -109,6 +110,15 @@ tr:last-child td{border-bottom:0}
       <tbody id="li-rows"></tbody>
     </table></div>
     <p class="note">El valor unitario es el valor declarado dividido por el peso neto exportado. Sirve como referencia del precio realizado, no como precio spot.</p>
+  </section>
+
+  <section id="sec-paises">
+    <div class="sec-head"><h2>Exportaciones por país, último año disponible</h2><span class="src">UN Comtrade</span></div>
+    <p class="lead">Litio y cobre de Chile, Argentina, Perú y Brasil. El valor unitario es valor declarado ÷ peso neto.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>País</th><th>Producto</th><th>Año</th><th>Toneladas</th><th>Valor (US$ M)</th><th>US$/t</th></tr></thead>
+      <tbody id="pais-rows"></tbody>
+    </table></div>
   </section>
 
   <section id="sec-cl" hidden>
@@ -231,6 +241,14 @@ function render(D){
   barsLitio(li);
   document.getElementById('li-rows').innerHTML = [...li].sort((a,b) => b.anio - a.anio || a.hs.localeCompare(b.hs)).map(f =>
     `<tr><td>${f.anio}</td><td>${f.producto}</td><td>${f.toneladas!=null?fmt(f.toneladas):'—'}</td><td>${fmt(f.valor_musd,1)}</td><td>${f.precio_unitario_usd_t!=null?fmt(f.precio_unitario_usd_t):'—'}</td></tr>`).join('');
+  const todas = [...(D.litio_exportaciones || []), ...(D.cobre_exportaciones || [])];
+  const ultimo = {};
+  todas.forEach(f => { const k = f.pais + '|' + f.hs; if (!ultimo[k] || f.anio > ultimo[k].anio) ultimo[k] = f; });
+  const orden = ['283691','282520','2603','7403'];
+  const filasPais = Object.values(ultimo).sort((a,b) => orden.indexOf(a.hs) - orden.indexOf(b.hs) || b.valor_musd - a.valor_musd);
+  document.getElementById('pais-rows').innerHTML = filasPais.length ? filasPais.map(f =>
+    `<tr><td>${f.pais}</td><td>${f.producto}</td><td>${f.anio}</td><td>${f.toneladas!=null?fmt(f.toneladas):'—'}</td><td>${fmt(f.valor_musd,1)}</td><td>${f.precio_unitario_usd_t!=null?fmt(f.precio_unitario_usd_t):'—'}</td></tr>`).join('')
+    : '<tr><td colspan="6">Sin datos todavía: se completan en la próxima ejecución del conector.</td></tr>';
   const cl = D.chile_bcch || [];
   if (cl.length) { document.getElementById('sec-cl').hidden = false;
     document.getElementById('cl-rows').innerHTML = cl.map(r => `<tr><td>${r.nombre}</td><td>${r.id}</td><td>${fmt(r.ultimo.valor, 2)}</td><td>${fDia(r.ultimo.fecha)}</td><td>${r.unidad}</td></tr>`).join(''); }

@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CritMine · Informe 5 oct 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: hoja de mercado — mastil con ficha de elemento, tablero de precios, luego secciones con rótulo lateral (desktop) que se apilan en móvil */
+:root{
+  --salt:#F3F5F4;       /* costra de salar, fondo */
+  --paper:#FFFFFF;
+  --basalt:#17212A;     /* tinta */
+  --muted:#5C6A72;
+  --line:#D9DFDD;
+  --brine:#1D6E6B;      /* acento: salmuera */
+  --brine-soft:#E2EEEC;
+  --up:#1F7A4D; --down:#B0303F; --flat:#6B7780;
+  --f-display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --f-body:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-data:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --salt:#10171C;--paper:#162027;--basalt:#E6ECEA;--muted:#9AA9B0;--line:#2A3740;
+  --brine:#5FC2BB;--brine-soft:#18302F;--up:#5BC08A;--down:#E77683;--flat:#93A1A8;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --salt:#10171C;--paper:#162027;--basalt:#E6ECEA;--muted:#9AA9B0;--line:#2A3740;
+  --brine:#5FC2BB;--brine-soft:#18302F;--up:#5BC08A;--down:#E77683;--flat:#93A1A8;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--salt);color:var(--basalt);font-family:var(--f-body);font-size:16px;line-height:1.6;padding-inline:20px;padding-block:0 64px}
+.wrap{max-width:1080px;margin:0 auto}
+a{color:var(--brine);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--brine);outline-offset:2px;border-radius:2px}
+h1,h2,h3{text-wrap:balance;font-weight:400}
+.num{font-family:var(--f-data);font-variant-numeric:tabular-nums}
+
+/* Mástil */
+.mast{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;padding-block:40px 28px;border-bottom:1px solid var(--basalt)}
+.brand{display:flex;align-items:center;gap:18px}
+.el{width:64px;height:64px;border:1.5px solid var(--basalt);display:grid;grid-template-rows:auto 1fr auto;padding:4px 6px;font-family:var(--f-data);font-size:10px;line-height:1.1;flex:none}
+.el b{font-family:var(--f-display);font-size:28px;font-weight:600;line-height:1;align-self:center}
+.el span:last-child{text-align:right;color:var(--muted)}
+.brand-name{font-family:var(--f-display);font-size:clamp(34px,6vw,52px);line-height:1;letter-spacing:-.01em}
+.brand-name i{color:var(--brine)}
+.brand-tag{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+nav{display:flex;flex-wrap:wrap;gap:18px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;width:100%;order:3}nav a{color:var(--basalt);text-decoration:none}nav a[aria-current]{color:var(--brine)}
+.meta{font-family:var(--f-data);font-size:12px;color:var(--muted);text-align:right;display:grid;gap:2px}
+.meta strong{color:var(--basalt);font-weight:500}
+.ed{display:inline-block;background:var(--basalt);color:var(--salt);padding:2px 8px;letter-spacing:.1em;text-transform:uppercase;font-size:11px;justify-self:end}
+
+.hero{padding-block:36px 8px;display:grid;gap:12px}
+.hero h1{font-family:var(--f-display);font-size:clamp(30px,4.6vw,48px);line-height:1.12;margin:0;max-width:22ch}
+.hero p{margin:0;color:var(--muted);max-width:62ch;font-size:17px}
+
+/* Tablero de precios */
+.board{margin-block:28px 8px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line);background:var(--paper)}
+.tick{padding:16px 18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;gap:4px;min-width:0}
+.tick .lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tick .px{font-family:var(--f-data);font-size:24px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1.2}
+.tick .u{font-size:12px;color:var(--muted);font-family:var(--f-data)}
+.chg{font-family:var(--f-data);font-size:13px;font-variant-numeric:tabular-nums}
+.chg.dn{color:var(--down)}.chg.up{color:var(--up)}.chg.fl{color:var(--flat)}
+.board-note{font-size:12px;color:var(--muted);margin:10px 0 0}
+
+/* Secciones */
+section{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px 48px;padding-block:44px;border-bottom:1px solid var(--line)}
+.side{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:10px}
+.side .sn{display:block;font-family:var(--f-display);font-size:40px;letter-spacing:0;color:var(--brine);line-height:1;margin-bottom:8px;text-transform:none}
+section h2{font-family:var(--f-display);font-size:clamp(26px,3.2vw,34px);line-height:1.15;margin:0 0 12px}
+.lead{font-size:17px;max-width:65ch;margin:0 0 24px}
+.body{min-width:0}
+h3{font-family:var(--f-body);font-weight:600;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:32px 0 12px}
+
+/* Resumen */
+.keys{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:k}
+.keys li{counter-increment:k;display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;padding-block:18px;border-top:1px solid var(--line)}
+.keys li::before{content:counter(k);font-family:var(--f-display);font-size:30px;line-height:1;color:var(--brine)}
+.keys b{display:block;font-weight:600;margin-bottom:4px;font-size:17px}
+.keys p{margin:0;max-width:68ch}
+
+/* Tablas */
+.tbl{overflow-x:auto;background:var(--paper);border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:left;padding:12px 14px;border-bottom:1px solid var(--basalt);white-space:nowrap}
+td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.n{font-family:var(--f-data);font-variant-numeric:tabular-nums;white-space:nowrap}
+.wide table{min-width:820px}
+.note{font-size:14px;color:var(--muted);max-width:70ch;margin:14px 0 0}
+.tag{display:inline-block;font-size:11px;letter-spacing:.06em;padding:1px 7px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tag.ar{border-color:var(--brine);color:var(--brine)}
+.side-sell{color:var(--up);font-weight:600}.side-buy{color:var(--brine);font-weight:600}
+
+/* Regulación */
+.countries{display:grid;gap:0}
+.country{display:grid;grid-template-columns:120px minmax(0,1fr);gap:20px;padding-block:18px;border-top:1px solid var(--line)}
+.country h4{margin:0;font-family:var(--f-display);font-size:22px;font-weight:400}
+.country p{margin:0;max-width:68ch}
+.quiet{color:var(--muted)}
+
+/* Agenda */
+.agenda{list-style:none;margin:0;padding:0;display:grid}
+.agenda li{display:grid;grid-template-columns:110px minmax(0,1fr);gap:20px;padding-block:14px;border-top:1px solid var(--line)}
+.agenda .d{font-family:var(--f-data);font-size:13px;color:var(--brine)}
+.agenda .d.tbd{color:var(--muted)}
+
+/* Fuentes */
+details{border-top:1px solid var(--line);padding-block:12px}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";font-family:var(--f-data);color:var(--muted)}
+details[open] summary::after{content:"–"}
+details ul{margin:12px 0 4px;padding-left:18px;columns:2 300px;column-gap:40px;font-size:14px}
+details li{break-inside:avoid;margin-bottom:6px}
+.foot{padding-block:28px 0;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+@media (max-width:760px){
+  section{grid-template-columns:1fr;padding-block:32px;gap:8px}
+  .side{padding-top:0;display:flex;align-items:baseline;gap:10px}
+  .side .sn{font-size:24px;margin:0}
+  .meta{text-align:left}.ed{justify-self:start}
+  .country,.agenda li{grid-template-columns:1fr;gap:4px}
+  .keys li{grid-template-columns:32px minmax(0,1fr);gap:10px}
+  .keys li::before{font-size:24px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .board .tick{animation:rise .5s ease both}
+  .board .tick:nth-child(2){animation-delay:.05s}.board .tick:nth-child(3){animation-delay:.1s}
+  .board .tick:nth-child(4){animation-delay:.15s}.board .tick:nth-child(5){animation-delay:.2s}
+  @keyframes rise{from{transform:translateY(6px)}to{transform:none}}
+}
+</style>
+
+<style>body{margin:0}</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <div class="brand">
+      <div class="el" aria-hidden="true"><span>3</span><b>Li</b><span>6,94</span></div>
+      <div>
+        <div class="brand-name">Crit<i>Mine</i></div>
+        <div class="brand-tag">Minerales críticos · Latinoamérica</div>
+      </div>
+    </div>
+    <nav aria-label="Secciones del sitio">
+      <a href="index.html">Inicio</a>
+      <a href="informe-2026-10-05.html" aria-current="page">Informes</a>
+      <a href="panel.html">Datos</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+    <div class="meta">
+      <span class="ed">Informe completo</span>
+      <span><strong>Lunes 5 de octubre de 2026</strong></span>
+      <span>Periodo: 28 sep – 5 oct 2026</span>
+      <span>Litio · Tierras raras · Masa negra</span>
+    </div>
+  </header>
+
+  <div class="hero">
+    <h1>El litio cae antes del feriado chino; Argentina suma productores y Brasil mueve las tierras raras</h1>
+    <p>China cerró del 1 al 7 de octubre, así que los últimos precios son del 29–30 de septiembre. GFEX reabre el 8 de octubre.</p>
+  </div>
+
+  <div class="board" role="list" aria-label="Precios de referencia">
+    <div class="tick" role="listitem"><span class="lbl">Carbonato · GFEX LC2701</span><span class="px">119.100</span><span class="u">CNY/t · 30 sep</span><span class="chg dn">▼ aprox. 3,8% semanal</span></div>
+    <div class="tick" role="listitem"><span class="lbl">Hidróxido · LME CIF</span><span class="px">16.500</span><span class="u">US$/t · 5 oct</span><span class="chg dn">▼ 0,6% diario</span></div>
+    <div class="tick" role="listitem"><span class="lbl">Espodumeno SC6 · CIF China</span><span class="px">1.735</span><span class="u">US$/t · 29 sep</span><span class="chg dn">▼ 3,1% diario</span></div>
+    <div class="tick" role="listitem"><span class="lbl">Óxido NdPr · China</span><span class="px">738–741k</span><span class="u">CNY/t · 30 sep</span><span class="chg up">▲ 0,2–0,3% semanal</span></div>
+    <div class="tick" role="listitem"><span class="lbl">Masa negra NCM · payable Ni/Co</span><span class="px">72,5–74%</span><span class="u">China · 28–30 sep</span><span class="chg dn">▼ 1 p.p. mensual</span></div>
+  </div>
+  <p class="board-note">Fuentes: SMM, LME/Fastmarkets MB. Detalle y enlaces en la sección 2.</p>
+
+  <section id="resumen">
+    <div class="side"><span class="sn">1</span>Resumen ejecutivo</div>
+    <div class="body">
+      <h2>Lo que importa a quien compra o vende</h2>
+      <ol class="keys">
+        <li><div><b>El litio cae antes del feriado chino</b><p>El futuro GFEX LC2701 cerró en 119.100 CNY/t el 30 sep, cerca de −3,8% en la semana; Trading Economics marca −22,5% en el mes. Pesan los inventarios chinos revisados al alza (unas 175.000 t más por un cambio de método de SMM), los reinicios en Australia y las compras mínimas antes del feriado.</p></div></li>
+        <li><div><b>Argentina: llegan productores nuevos en octubre</b><p>POSCO inaugura Sal de Oro II (23–25 ktpa LCE) el 6 oct, y Rio Tinto inaugura Sal de Vida (15 ktpa) y Fénix 1B (38 ktpa) el 28 oct. Lake Resources obtuvo la DIA de Kachi y abre un proceso de socios y offtake.</p></div></li>
+        <li><div><b>Brasil: Sigma Lithium se detiene</b><p>Paralizó mina y planta desde el 30 sep. El TRF-6 restituyó tres licencias el 1 oct, pero sigue vigente la interdicción de la ANM por los taludes. No hay confirmación pública de reinicio, lo que deja un hueco de corto plazo en el espodumeno brasileño.</p></div></li>
+        <li><div><b>Lynas compra Meteoric (Caldeira, Minas Gerais)</b><p>Es una operación en acciones por A$968M (US$672M). Lynas estudiará una planta de separación en Brasil. El NdPr se mantiene firme en 738.000–741.000 CNY/t.</p></div></li>
+        <li><div><b>Chile y Bolivia abren puertas</b><p>CleanTech Lithium busca socio para Laguna Verde (15 ktpa), con más de 20 NDA firmados. En Bolivia, el Decreto 5526 permite reestructurar YLB.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="precios">
+    <div class="side"><span class="sn">2</span>Precios</div>
+    <div class="body">
+      <h2>Precios de referencia</h2>
+      <p class="lead">Carbonato, hidróxido y SC6 bajaron en la semana; el NdPr se mantuvo firme. Fastmarkets, Benchmark y Argus no publicaron cifras abiertas esta semana.</p>
+      <div class="tbl wide"><table>
+        <thead><tr><th>Producto</th><th>Precio</th><th>Fecha</th><th>Variación</th><th>Fuente</th></tr></thead>
+        <tbody>
+          <tr><td>Carbonato de litio, futuro GFEX LC2701</td><td class="n">119.100 CNY/t</td><td class="n">30 sep</td><td class="n">aprox. −3,8% semanal</td><td><a href="https://news.metal.com/newscontent/104142758-weekly-review-of-the-lithium-carbonate-market-spot-lithium-carbonate-price-center-moved-further-downward-during-928-930-smm-weekly-review" target="_blank" rel="noopener">SMM</a></td></tr>
+          <tr><td>Carbonato de litio, spot China</td><td class="n">122.800 CNY/t</td><td class="n">30 sep</td><td class="n">−0,49% diario; −22,5% mensual</td><td><a href="https://tradingeconomics.com/commodity/lithium" target="_blank" rel="noopener">Trading Economics</a></td></tr>
+          <tr><td>Carbonato grado batería, spot</td><td class="n">US$16.158/t</td><td class="n">30 sep</td><td class="n">−US$75 diario</td><td><a href="https://www-old.metal.com/Lithium" target="_blank" rel="noopener">SMM</a></td></tr>
+          <tr><td>Hidróxido grado batería (grueso), spot</td><td class="n">US$14.671/t</td><td class="n">30 sep</td><td class="n">−US$128 diario</td><td><a href="https://www-old.metal.com/Lithium" target="_blank" rel="noopener">SMM</a></td></tr>
+          <tr><td>Hidróxido CIF (LME / Fastmarkets MB)</td><td class="n">US$16.500/t</td><td class="n">5 oct</td><td class="n">−0,6% diario</td><td><a href="https://www.lme.com/metals/ev/lme-lithium-hydroxide-cif-fastmarkets-mb" target="_blank" rel="noopener">LME</a></td></tr>
+          <tr><td>Espodumeno SC6, índice CIF China</td><td class="n">US$1.735/t</td><td class="n">29 sep</td><td class="n">−3,1% diario</td><td><a href="https://www-old.metal.com/lithium/201906260003" target="_blank" rel="noopener">SMM</a></td></tr>
+          <tr><td>Óxido NdPr, China</td><td class="n">738.000–741.000 CNY/t</td><td class="n">30 sep</td><td class="n">+0,2–0,3% semanal</td><td><a href="https://news.metal.com/newscontent/104142377-pr-nd-prices-hold-firm-with-a-steady-rise-trading-tends-to-thin-before-the-holiday-smm-rare-earth-weekly-review" target="_blank" rel="noopener">SMM</a></td></tr>
+          <tr><td>Óxido NdPr, en USD</td><td class="n">US$97,30/kg</td><td class="n">30 sep</td><td class="n">+0,63% frente a la lectura previa</td><td><a href="https://critical-minerals-news.com/rare-earths-price/" target="_blank" rel="noopener">Critical Minerals News</a></td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">SP Angel (2 oct) cita el carbonato al 99% en China en US$19.161/t; la diferencia con SMM viene de la base de precio (spot o futuro, con o sin IVA). Como referencia local, Argentina exportó carbonato a US$19.292/t en agosto (<a href="https://www.ambito.com/energia/exportaciones-mineras-superan-us6000-millones-ocho-meses-y-el-litio-crece-190-n6328351" target="_blank" rel="noopener">Ámbito</a>).</p>
+
+      <h3>Masa negra · payables en China</h3>
+      <div class="tbl"><table>
+        <thead><tr><th>Material</th><th>Condición</th><th>Variación</th></tr></thead>
+        <tbody>
+          <tr><td>LFP, electrodo</td><td class="n">5.750–6.200 CNY por punto de % Li</td><td class="n">−275 semanal</td></tr>
+          <tr><td>LFP, batería</td><td class="n">4.950–5.400 CNY por punto de % Li</td><td class="n quiet">sin dato</td></tr>
+          <tr><td>NCM, electrodo (payable Ni/Co)</td><td class="n">72,5–74%</td><td class="n">−1 p.p. mensual</td></tr>
+          <tr><td>NCM alto níquel, series 8–9 (payable Ni/Co)</td><td class="n">76–77%</td><td class="n quiet">sin dato</td></tr>
+          <tr><td>LCO, electrodo / batería (payable Co/Li)</td><td class="n">69,5–71,5% / 66–69%</td><td class="n quiet">sin dato</td></tr>
+        </tbody>
+      </table></div>
+      <p class="note">No hay payables públicos para LATAM. Fuente: <a href="https://news.metal.com/newscontent/104142809-smm-analysis-hydrometallurgical-recycling-market-this-week-no-stockpiling-plans-before-the-holiday-sluggish-market-transactions-2026928-2026930" target="_blank" rel="noopener">SMM, reciclaje hidrometalúrgico, 28–30 sep</a>.</p>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <div class="side"><span class="sn">3</span>Proyectos y empresas</div>
+    <div class="body">
+      <h2>Capacidad nueva, una pausa y una fusión</h2>
+      <div class="tbl wide"><table>
+        <thead><tr><th>Fecha</th><th>País</th><th>Empresa / proyecto</th><th>Hecho</th><th>Cifras</th></tr></thead>
+        <tbody>
+          <tr><td class="n">2 oct</td><td><span class="tag">Brasil</span></td><td><a href="https://www.noticiasdemineracao.com/minerio-de-ferro/news-articles/4537678/cabo-verde-suspende-operacao-minerio-ferro" target="_blank" rel="noopener">Cabo Verde Mineração</a></td><td>Suspende el hierro en Catumbi y se enfoca en tierras raras</td><td>Posible nuevo actor</td></tr>
+          <tr><td class="n">1–2 oct</td><td><span class="tag ar">Argentina</span></td><td><a href="https://www.elesquiu.com/politica/2026/10/2/cuatro-proyectos-litiferos-inauguraran-sus-plantas-de-produccion-en-octubre-598390.html" target="_blank" rel="noopener">Rio Tinto (Sal de Vida, Fénix 1B) y Galan (HMW)</a></td><td>Cuatro plantas se inauguran en octubre en Catamarca</td><td class="n">15 + 38 + 5 ktpa; aprox. US$3.300M en RIGI</td></tr>
+          <tr><td class="n">1 oct</td><td><span class="tag">Brasil</span></td><td><a href="https://www.miningweekly.com/article/australias-lynas-rare-earths-to-buy-meteoric-resources-for-672m-2026-10-01" target="_blank" rel="noopener">Lynas – Meteoric (Caldeira)</a></td><td>Compra en acciones; estudiará una planta de separación en Brasil</td><td class="n">US$672M; aprox. 3.862 t/a de NdPr</td></tr>
+          <tr><td class="n">1 oct</td><td><span class="tag">Brasil</span></td><td><a href="https://sigmalithiumcorp.com/sigma-lithium-announces-its-operations-temporarily-paused-awaiting-ruling-by-federal-court-of-appeals-maintains-2027-guidance-of-330000t/" target="_blank" rel="noopener">Sigma Lithium</a></td><td>Operación en pausa; el TRF-6 restituyó 3 licencias, pero sigue la interdicción de la ANM</td><td class="n">Mantiene la guía 2027 de 330 kt</td></tr>
+          <tr><td class="n">1 oct</td><td><span class="tag ar">Argentina</span></td><td><a href="https://www.globenewswire.com/news-release/2026/10/01/3372856/0/en/eramet-plans-to-apply-under-argentina-s-large-investment-incentive-regime-rigi-for-a-first-expansion-of-centenario-ratones.html" target="_blank" rel="noopener">Eramet, Centenario-Ratones</a></td><td>Pedirá el RIGI para la expansión; FID a fines de 2027</td><td class="n">+11 kt LCE/a; US$350M</td></tr>
+          <tr><td class="n">1 oct</td><td><span class="tag ar">Argentina</span></td><td><a href="https://mineria-pa.com/2026/10/01/argentina-cauchari-olaroz-sumaria-10-000-toneladas-anuales-de-lce-desde-2028/" target="_blank" rel="noopener">Lithium Argentina, Cauchari-Olaroz F2</a></td><td>Estudio de alcance; primer módulo DLE en 2028</td><td class="n">+45 ktpa; TIR 28,5%</td></tr>
+          <tr><td class="n">1 oct</td><td><span class="tag">Chile</span></td><td><a href="https://www.mining.com/web/chilean-lithium-project-draws-investors-despite-metal-rout" target="_blank" rel="noopener">CleanTech Lithium, Laguna Verde</a></td><td>Más de 20 NDA firmados; elegirá socio entre fines de 2026 e inicios de 2027</td><td class="n">15 ktpa de carbonato</td></tr>
+          <tr><td class="n">1 oct</td><td><span class="tag">Brasil</span></td><td><a href="https://www.noticiasdemineracao.com/metais-basicos/news-articles/4537614/sondagem-da-oceana-confirma-descoberta-terras-raras-em-mg" target="_blank" rel="noopener">Oceana, Serra Negra</a></td><td>El sondaje confirma tierras raras</td><td class="n">122 m al 1,2% TREO</td></tr>
+          <tr><td class="n">30 sep</td><td><span class="tag ar">Argentina</span></td><td><a href="https://lithium-triangle-southamerica.com/posco-sal-de-oro-salta-litio/" target="_blank" rel="noopener">POSCO, Sal de Oro II</a></td><td>Se inaugura el 6 oct; busca llegar a 100 ktpa</td><td class="n">+23 ktpa; capex US$633M</td></tr>
+          <tr><td class="n">29 sep</td><td><span class="tag ar">Argentina</span></td><td><a href="https://smallcaps.com.au/article/lake-resources-granted-environmental-approval-at-kachi-project-ahead-of-feed-stage" target="_blank" rel="noopener">Lake Resources, Kachi</a></td><td>DIA aprobada; pasa a FEED; busca socios, offtake y agencias de crédito a la exportación (ECA)</td><td class="n">25 ktpa DLE; capex &gt;US$1.100M</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section id="regulacion">
+    <div class="side"><span class="sn">4</span>Regulación y política</div>
+    <div class="body">
+      <h2>Bolivia abre YLB; Brasil se define en la segunda vuelta</h2>
+      <div class="countries">
+        <div class="country"><h4>Bolivia</h4><p>El Decreto 5526 (28 sep) permite reestructurar, disolver o liquidar empresas estatales, incluida YLB (<a href="https://www.eldestapeweb.com/internacionales/paz-le-abre-puerta-privatizaciones-siembra-terreno-vender-empresas-litio-petroleo-2026928223247" target="_blank" rel="noopener">El Destape</a>). YLB debe Bs 5.536M al Banco Central, opera al 14% de su capacidad y tiene patrimonio negativo (<a href="https://eldeber.com.bo/economia/tres-estatales-situacion-critica-deben-bs-7-441-millones-bcb_1791079688" target="_blank" rel="noopener">El Deber</a>). Los contratos con CBC y Uranium One siguen congelados.</p></div>
+        <div class="country"><h4>Brasil</h4><p>La ley del 16 sep da créditos fiscales de hasta 20% del gasto en procesamiento y crea un consejo que debe aprobar los cambios de control en activos estratégicos (<a href="https://www.mining.com/us-warms-to-building-brazil-critical-minerals-chain/" target="_blank" rel="noopener">MINING.COM</a>). En la primera vuelta, Flávio Bolsonaro obtuvo 47,03% y Lula 45,16%; la segunda vuelta es el 25 oct.</p></div>
+        <div class="country"><h4>Argentina</h4><p>No hubo aprobaciones nuevas de RIGI para litio esta semana; Eramet y Lake anunciaron que lo pedirán. Las exportaciones de litio de enero a agosto suman US$1.467M (+190,5% interanual), y China compra el 81,1%.</p></div>
+        <div class="country"><h4>Chile</h4><p class="quiet">Sin anuncios en la ventana. Tres contratos especiales de operación (CEOL) siguen en la Contraloría: Laguna Verde, Ascotán y Kuska. El decreto de baterías de la Ley REP vence el 29 ene 2027.</p></div>
+        <div class="country"><h4>Perú</h4><p class="quiet">Sin cambios. Falchani espera su permiso ambiental en el 2S 2028.</p></div>
+        <div class="country"><h4>México</h4><p class="quiet">Sin noticias en la ventana. LitioMx no tiene inversión en el presupuesto 2027. Una regla de exportación de EE.UU. (BIS) exige que la masa negra quede en ese país; los comentarios cierran el 4 nov.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="oportunidades">
+    <div class="side"><span class="sn">5</span>Oportunidades</div>
+    <div class="body">
+      <h2>Contrapartes para un broker</h2>
+      <p class="lead">Son señales públicas, no ofertas confirmadas; conviene validarlas directamente con cada empresa.</p>
+      <div class="tbl wide"><table>
+        <thead><tr><th>Contraparte</th><th>Lado</th><th>Producto</th><th>Por qué ahora</th><th>Siguiente paso</th></tr></thead>
+        <tbody>
+          <tr><td>Lake Resources · Kachi (AR)</td><td class="side-sell">Vende</td><td>Carbonato DLE, 25 ktpa</td><td>Proceso abierto de socios y offtake, con Citi y JP Morgan como asesores</td><td>Contactar a los asesores</td></tr>
+          <tr><td>CleanTech · Laguna Verde (CL)</td><td class="side-sell">Vende</td><td>Carbonato, 15 ktpa</td><td>Más de 20 NDA firmados, incluidos traders</td><td>Pedir NDA y data room</td></tr>
+          <tr><td>Galan · Hombre Muerto West (AR)</td><td class="side-sell">Vende</td><td>Cloruro de litio, 4 ktpa LCE</td><td>Primeras ventas en el 4T 2026</td><td>Preguntar por cargas spot</td></tr>
+          <tr><td>POSCO / Rio Tinto (AR)</td><td class="side-sell">Vende</td><td>Carbonato e hidróxido</td><td>El volumen de arranque puede salir a spot</td><td>Seguir las inauguraciones del 6 y 28 oct</td></tr>
+          <tr><td>Clientes de espodumeno de Brasil</td><td class="side-buy">Compra</td><td>SC5,5–SC6</td><td>Sigma está en pausa</td><td>Ofrecer cargas de Australia o África</td></tr>
+          <tr><td>Juniors de tierras raras en Minas Gerais</td><td class="side-buy">Busca socio</td><td>Arcilla iónica / concentrado mixto (MREC)</td><td>Están en etapa temprana</td><td>Buscar pre-offtake</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section id="vigilar">
+    <div class="side"><span class="sn">6</span>Qué vigilar</div>
+    <div class="body">
+      <h2>Agenda</h2>
+      <ul class="agenda">
+        <li><span class="d">6 oct</span><span>POSCO inaugura Sal de Oro II (Catamarca)</span></li>
+        <li><span class="d">7–8 oct</span><span>Seminario “Litio en Sudamérica 2026” en Jujuy</span></li>
+        <li><span class="d">8 oct</span><span>China reabre: primera lectura del GFEX tras la caída de septiembre</span></li>
+        <li><span class="d tbd">por confirmar</span><span>Reinicio de Sigma; inauguración de Galan; FID de Viridis; CEOL chilenos</span></li>
+        <li><span class="d">20 oct</span><span>Investor Day de Aclara (Nueva York)</span></li>
+        <li><span class="d">25 oct</span><span>Segunda vuelta presidencial en Brasil</span></li>
+        <li><span class="d">28 oct</span><span>Rio Tinto inaugura Sal de Vida y Fénix 1B</span></li>
+        <li><span class="d">4 nov</span><span>Cierre de comentarios a la regla BIS sobre masa negra · resultados del 3T de Albemarle</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="fuentes">
+    <div class="side"><span class="sn">·</span>Fuentes</div>
+    <div class="body">
+      <h2>Fuentes consultadas</h2>
+      <details open><summary>Precios</summary><ul>
+        <li><a href="https://news.metal.com/newscontent/104142758-weekly-review-of-the-lithium-carbonate-market-spot-lithium-carbonate-price-center-moved-further-downward-during-928-930-smm-weekly-review" target="_blank" rel="noopener">SMM · carbonato, semana 28–30 sep</a></li>
+        <li><a href="https://www-old.metal.com/Lithium" target="_blank" rel="noopener">SMM · panel de litio</a></li>
+        <li><a href="https://www-old.metal.com/lithium/201906260003" target="_blank" rel="noopener">SMM · espodumeno 6% CIF</a></li>
+        <li><a href="https://news.metal.com/newscontent/104142377-pr-nd-prices-hold-firm-with-a-steady-rise-trading-tends-to-thin-before-the-holiday-smm-rare-earth-weekly-review" target="_blank" rel="noopener">SMM · tierras raras semanal</a></li>
+        <li><a href="https://news.metal.com/newscontent/104142809-smm-analysis-hydrometallurgical-recycling-market-this-week-no-stockpiling-plans-before-the-holiday-sluggish-market-transactions-2026928-2026930" target="_blank" rel="noopener">SMM · reciclaje hidrometalúrgico</a></li>
+        <li><a href="https://tradingeconomics.com/commodity/lithium" target="_blank" rel="noopener">Trading Economics · litio</a></li>
+        <li><a href="https://www.lme.com/metals/ev/lme-lithium-hydroxide-cif-fastmarkets-mb" target="_blank" rel="noopener">LME · hidróxido CIF</a></li>
+        <li><a href="https://critical-minerals-news.com/rare-earths-price/" target="_blank" rel="noopener">Critical Minerals News · NdPr</a></li>
+        <li><a href="https://share-talk.com/sp-angel-todays-market-view-friday-2nd-october-2026" target="_blank" rel="noopener">SP Angel · 2 oct</a></li>
+      </ul></details>
+      <details><summary>Argentina</summary><ul>
+        <li><a href="https://www.ambito.com/energia/exportaciones-mineras-superan-us6000-millones-ocho-meses-y-el-litio-crece-190-n6328351" target="_blank" rel="noopener">Ámbito · exportaciones mineras</a></li>
+        <li><a href="https://www.ambito.com/energia/litio-sudamerica-2026-jujuy-reune-los-protagonistas-una-industria-despegue-n6329685" target="_blank" rel="noopener">Ámbito · Litio en Sudamérica</a></li>
+        <li><a href="https://smallcaps.com.au/article/lake-resources-granted-environmental-approval-at-kachi-project-ahead-of-feed-stage" target="_blank" rel="noopener">Smallcaps · Kachi</a></li>
+        <li><a href="https://lithium-triangle-southamerica.com/posco-sal-de-oro-salta-litio/" target="_blank" rel="noopener">Lithium Triangle · POSCO</a></li>
+        <li><a href="https://www.globenewswire.com/news-release/2026/10/01/3372856/0/en/eramet-plans-to-apply-under-argentina-s-large-investment-incentive-regime-rigi-for-a-first-expansion-of-centenario-ratones.html" target="_blank" rel="noopener">GlobeNewswire · Eramet</a></li>
+        <li><a href="https://www.elesquiu.com/politica/2026/10/2/cuatro-proyectos-litiferos-inauguraran-sus-plantas-de-produccion-en-octubre-598390.html" target="_blank" rel="noopener">El Esquiú · plantas de octubre</a></li>
+        <li><a href="https://mineria-pa.com/2026/10/01/argentina-cauchari-olaroz-sumaria-10-000-toneladas-anuales-de-lce-desde-2028/" target="_blank" rel="noopener">Minería PA · Cauchari-Olaroz</a></li>
+        <li><a href="https://www.panorama-minero.com/en/news/argentina-strengthens-its-global-lithium-position-as-production-grows-costs-fall-and-efficiency-improves" target="_blank" rel="noopener">Panorama Minero</a></li>
+      </ul></details>
+      <details><summary>Brasil</summary><ul>
+        <li><a href="https://sigmalithiumcorp.com/sigma-lithium-announces-its-operations-temporarily-paused-awaiting-ruling-by-federal-court-of-appeals-maintains-2027-guidance-of-330000t/" target="_blank" rel="noopener">Sigma Lithium · comunicado</a></li>
+        <li><a href="https://www.noticiasdemineracao.com/seguranca/news-articles/4537568/anm-interdita-parte-da-mina-da-sigma-em-mg" target="_blank" rel="noopener">Notícias de Mineração · ANM</a></li>
+        <li><a href="https://brasilmineral.com.br/noticias/justica-concede-tres-licencas-a-sigma-mas-mantem-duas-suspensas" target="_blank" rel="noopener">Brasil Mineral · licencias Sigma</a></li>
+        <li><a href="https://www.miningweekly.com/article/australias-lynas-rare-earths-to-buy-meteoric-resources-for-672m-2026-10-01" target="_blank" rel="noopener">Mining Weekly · Lynas–Meteoric</a></li>
+        <li><a href="https://brasilmineral.com.br/noticias/lynas-rare-earths-adquire-meteoric-resources-e-anuncia-nova-etapa-do-projeto-caldeira" target="_blank" rel="noopener">Brasil Mineral · Caldeira</a></li>
+        <li><a href="https://www.mining.com/us-warms-to-building-brazil-critical-minerals-chain/" target="_blank" rel="noopener">MINING.COM · EE.UU. y Brasil</a></li>
+        <li><a href="https://www.noticiasdemineracao.com/metais-basicos/news-articles/4537614/sondagem-da-oceana-confirma-descoberta-terras-raras-em-mg" target="_blank" rel="noopener">Notícias de Mineração · Oceana</a></li>
+        <li><a href="https://www.noticiasdemineracao.com/minerio-de-ferro/news-articles/4537678/cabo-verde-suspende-operacao-minerio-ferro" target="_blank" rel="noopener">Notícias de Mineração · Cabo Verde</a></li>
+        <li><a href="https://www.riotimesonline.com/?p=712533" target="_blank" rel="noopener">Rio Times · elecciones</a></li>
+      </ul></details>
+      <details><summary>Chile, Bolivia, Perú y México</summary><ul>
+        <li><a href="https://www.mining.com/web/chilean-lithium-project-draws-investors-despite-metal-rout" target="_blank" rel="noopener">MINING.COM · CleanTech</a></li>
+        <li><a href="https://www.latercera.com/pulso/noticia/gobierno-reingresa-a-contraloria-ceol-para-proyecto-de-litio-de-wealth-minerals-por-us-749-millones/" target="_blank" rel="noopener">La Tercera · CEOL Kuska</a></li>
+        <li><a href="https://www.paiscircular.cl/transicion-energetica/inclusion-de-las-baterias-de-iones-de-litio-en-las-metas-de-la-ley-rep-genera-opiniones-divididas-en-la-industria/" target="_blank" rel="noopener">País Circular · Ley REP</a></li>
+        <li><a href="https://eldeber.com.bo/economia/tres-estatales-situacion-critica-deben-bs-7-441-millones-bcb_1791079688" target="_blank" rel="noopener">El Deber · YLB</a></li>
+        <li><a href="https://www.eldestapeweb.com/internacionales/paz-le-abre-puerta-privatizaciones-siembra-terreno-vender-empresas-litio-petroleo-2026928223247" target="_blank" rel="noopener">El Destape · Decreto 5526</a></li>
+        <li><a href="https://www.miningweekly.com/article/falchani-lithium-project-peru-update-2026-09-25" target="_blank" rel="noopener">Mining Weekly · Falchani</a></li>
+        <li><a href="https://www.dwt.com/blogs/energy--environmental-law-blog/2026/09/bis-black-mass-tungsten-export-restrictions" target="_blank" rel="noopener">DWT · regla BIS</a></li>
+      </ul></details>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>CritMine · critmine.com · Medio independiente</span>
+    <span>Solo información pública. No es asesoría financiera ni de inversión.</span>
+  </footer>
+</div>
+
+</body>
+</html>

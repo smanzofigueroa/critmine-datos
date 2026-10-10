@@ -62,11 +62,14 @@ SERIES_BCRP = {
 
 COMTRADE_PREVIEW = "https://comtradeapi.un.org/public/v1/preview/C/A/HS"
 COMTRADE_FULL = "https://comtradeapi.un.org/data/v1/get/C/A/HS"
-PAISES_COMTRADE = {"152": "Chile"}  # se pueden sumar: 32 Argentina, 76 Brasil, 604 Perú
+PAISES_COMTRADE = {"152": "Chile", "32": "Argentina", "604": "Perú", "76": "Brasil"}
 PRODUCTOS_HS = {
     "283691": "Carbonato de litio",
     "282520": "Óxido e hidróxido de litio",
+    "2603": "Concentrado de cobre",
+    "7403": "Cobre refinado (cátodos)",
 }
+HS_LITIO = {"283691", "282520"}
 
 # Banco Central de Chile (BDE). Requiere token gratuito: variable de entorno BCCH_TOKEN.
 BCCH_URL = "https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx"
@@ -230,17 +233,20 @@ def descargar_bcrp(con: sqlite3.Connection, dias: int = 120, meses: int = 36) ->
         (mensuales, f"{(hoy.year * 12 + hoy.month - 1 - meses) // 12}-{(hoy.year * 12 + hoy.month - 1 - meses) % 12 + 1}",
          f"{hoy.year}-{hoy.month}"),
     ]
-    for codigos, desde, hasta in [([c], d, h) for cs, d, h in consultas for c in cs]:
-        url = BCRP_URL.format(codigos="-".join(codigos), desde=desde, hasta=hasta)
-        filas = parsear_bcrp(obtener_json(url), codigos)
-        for f in filas:
-            clave, _, unidad, _ = SERIES_BCRP[f["codigo"]]
-            con.execute(
-                "INSERT OR REPLACE INTO precios VALUES (?,?,?,?,?,?)",
-                (clave, f["fecha"], f["valor"], unidad, f"BCRP {f['codigo']}", ahora()),
-            )
-        total += len(filas)
-        time.sleep(1)
+    for codigos, desde, hasta in consultas:
+        # Una serie por consulta: con varias, la API puede devolverlas en otro orden
+        # (por ejemplo ordenadas por código) y se mezclarían plata y oro.
+        for codigo in codigos:
+            url = BCRP_URL.format(codigos=codigo, desde=desde, hasta=hasta)
+            filas = parsear_bcrp(obtener_json(url), [codigo])
+            for f in filas:
+                clave, _, unidad, _ = SERIES_BCRP[f["codigo"]]
+                con.execute(
+                    "INSERT OR REPLACE INTO precios VALUES (?,?,?,?,?,?)",
+                    (clave, f["fecha"], f["valor"], unidad, f"BCRP {f['codigo']}", ahora()),
+                )
+            total += len(filas)
+            time.sleep(1)
     con.commit()
     return total
 
@@ -351,16 +357,17 @@ def exportar_json(con: sqlite3.Connection, ruta: Path = JSON_PATH) -> dict:
                 out["var_semanal_pct"] = round((ult["valor"] / ref - 1) * 100, 2)
         return out
 
-    exportaciones = []
+    litio, cobre = [], []
     for pais, anio, hs, valor, peso in con.execute(
             "SELECT pais, anio, hs, valor_usd, peso_kg FROM exportaciones ORDER BY pais, anio, hs"):
-        exportaciones.append({
+        fila = {
             "pais": PAISES_COMTRADE.get(pais, pais), "anio": anio, "hs": hs,
             "producto": PRODUCTOS_HS.get(hs, hs),
             "valor_musd": round(valor / 1e6, 1),
             "toneladas": round(peso / 1000) if peso else None,
             "precio_unitario_usd_t": round(valor / (peso / 1000)) if peso else None,
-        })
+        }
+        (litio if hs in HS_LITIO else cobre).append(fila)
 
     chile = []
     for sid, meta in cargar_series_bcch().items():
@@ -379,7 +386,8 @@ def exportar_json(con: sqlite3.Connection, ruta: Path = JSON_PATH) -> dict:
         "cobre": {"unidad": "US$/t", **resumen("cobre_diario", "cobre_mensual", cobre_usd_t)},
         "plata": {"unidad": "US$/oz troy", **resumen("plata_diario", "plata_mensual")},
         "oro": {"unidad": "US$/oz troy", **resumen("oro_diario", "oro_mensual")},
-        "litio_exportaciones": exportaciones,
+        "litio_exportaciones": litio,
+        "cobre_exportaciones": cobre,
         "chile_bcch": chile,
     }
     ruta.parent.mkdir(parents=True, exist_ok=True)

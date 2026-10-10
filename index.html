@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CritMine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: portada de la plataforma — mástil con navegación, tesis + fila de cuatro fichas de elemento (Cu, Li, Nd, Co), tablero de precios, última edición, cuatro mercados, servicios, principios, contacto */
+:root{
+  --salt:#F3F5F4; --paper:#FFFFFF; --basalt:#17212A; --muted:#5C6A72; --line:#D9DFDD;
+  --brine:#1D6E6B; --brine-soft:#E2EEEC; --copper:#A4532B;
+  --up:#1F7A4D; --down:#B0303F;
+  --f-display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --f-body:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --f-data:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --salt:#10171C;--paper:#162027;--basalt:#E6ECEA;--muted:#9AA9B0;--line:#2A3740;--brine:#5FC2BB;--brine-soft:#18302F;--copper:#DE8B5F;--up:#5BC08A;--down:#E77683;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --salt:#10171C;--paper:#162027;--basalt:#E6ECEA;--muted:#9AA9B0;--line:#2A3740;--brine:#5FC2BB;--brine-soft:#18302F;--copper:#DE8B5F;--up:#5BC08A;--down:#E77683;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--salt);color:var(--basalt);font-family:var(--f-body);font-size:16px;line-height:1.6;padding-inline:20px;padding-block:0 64px}
+.wrap{max-width:1080px;margin:0 auto}
+a{color:var(--brine);text-decoration-thickness:1px;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--brine);outline-offset:2px}
+h1,h2,h3{text-wrap:balance;font-weight:400}
+
+.mast{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;padding-block:28px 22px;border-bottom:1px solid var(--basalt)}
+.brand{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.brand-name{font-family:var(--f-display);font-size:34px;line-height:1;letter-spacing:-.01em}
+.brand-name i{color:var(--brine)}
+.brand-tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+nav{display:flex;flex-wrap:wrap;gap:22px;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+nav a{color:var(--basalt);text-decoration:none}
+nav a:hover{color:var(--brine)}
+nav a[aria-current]{color:var(--brine);border-bottom:1px solid var(--brine)}
+
+/* Tesis */
+.hero{padding-block:60px 48px;display:grid;gap:40px}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--brine);margin:0 0 16px}
+.hero h1{font-family:var(--f-display);font-size:clamp(38px,6.4vw,74px);line-height:1.02;margin:0;max-width:16ch;letter-spacing:-.01em}
+.hero h1 i{color:var(--brine)}
+.hero-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:end}
+.hero p{margin:0 0 22px;font-size:18px;color:var(--muted);max-width:52ch}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;background:var(--basalt);color:var(--salt);padding:12px 22px;text-decoration:none;font-size:14px;letter-spacing:.06em;font-weight:500;border:0;cursor:pointer;font-family:var(--f-body)}
+.btn:hover{background:var(--brine)}
+.btn.ghost{background:transparent;color:var(--basalt);border:1px solid var(--basalt)}
+.btn.ghost:hover{color:var(--brine);border-color:var(--brine)}
+
+/* Fichas de elemento: la firma de la portada */
+.table{display:grid;grid-template-columns:repeat(4,96px);gap:8px}
+.el{aspect-ratio:1;max-width:100%;border:1.5px solid var(--basalt);display:grid;grid-template-rows:auto 1fr auto;padding:6px 8px;font-family:var(--f-data);font-size:11px;line-height:1.1;background:var(--paper);text-decoration:none;color:var(--basalt);transition:transform .2s ease,border-color .2s ease}
+.el b{font-family:var(--f-display);font-size:38px;font-weight:600;line-height:1;align-self:center}
+.el .nm{display:flex;justify-content:space-between;color:var(--muted)}
+.el.cu b{color:var(--copper)}
+.el:hover{transform:translateY(-3px);border-color:var(--brine)}
+
+/* Tablero */
+.board-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;border-top:1px solid var(--basalt);padding-top:14px}
+.board-head h2{font-family:var(--f-body);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0;font-weight:500}
+.board-head span{font-family:var(--f-data);font-size:12px;color:var(--muted)}
+.board{margin-top:14px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line);background:var(--paper)}
+.tick{padding:16px 18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;gap:4px;min-width:0}
+.tick .lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tick .px{font-family:var(--f-data);font-size:22px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1.2}
+.tick .u{font-size:12px;color:var(--muted);font-family:var(--f-data)}
+.chg{font-family:var(--f-data);font-size:13px;font-variant-numeric:tabular-nums}
+.chg.dn{color:var(--down)}.chg.up{color:var(--up)}
+.board-note{font-size:12px;color:var(--muted);margin:10px 0 0}
+
+section{display:grid;grid-template-columns:200px minmax(0,1fr);gap:16px 48px;padding-block:56px;border-bottom:1px solid var(--line)}
+.side{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:10px}
+section h2{font-family:var(--f-display);font-size:clamp(28px,3.4vw,38px);line-height:1.12;margin:0 0 14px}
+.lead{font-size:17px;max-width:62ch;margin:0 0 28px}
+.body{min-width:0}
+
+/* Última edición */
+.issue{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);background:var(--paper);border:1px solid var(--line)}
+.issue-main{padding:28px;display:grid;gap:12px;align-content:start}
+.issue .tag{font-family:var(--f-data);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:var(--basalt);color:var(--salt);padding:2px 8px;justify-self:start}
+.issue h3{font-family:var(--f-display);font-size:28px;line-height:1.15;margin:0}
+.issue p{margin:0;color:var(--muted)}
+.issue ol{margin:0;padding-left:20px;display:grid;gap:6px;font-size:15px}
+.issue-side{border-left:1px solid var(--line);padding:28px;display:grid;gap:16px;align-content:start}
+.issue-side h4{margin:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.cal{list-style:none;margin:0;padding:0;display:grid}
+.cal li{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;padding-block:10px;border-top:1px solid var(--line);font-size:15px}
+.cal .d{font-family:var(--f-data);font-size:13px;color:var(--brine)}
+
+/* Mercados */
+.mkts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.mkt{padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:64px minmax(0,1fr);gap:18px;align-items:start;background:var(--paper)}
+.mkt .el{width:64px}
+.mkt .el b{font-size:26px}
+.mkt h3{font-family:var(--f-display);font-size:24px;margin:0 0 6px}
+.mkt p{margin:0 0 10px;font-size:15px}
+.mkt .trk{font-family:var(--f-data);font-size:12px;color:var(--muted);line-height:1.5}
+
+/* Servicios */
+.svcs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--line)}
+.svcs div{padding:20px 24px 20px 0;border-bottom:1px solid var(--line)}
+.svcs b{display:block;font-family:var(--f-display);font-size:21px;font-weight:400;margin-bottom:4px}
+.svcs span{font-size:14px;color:var(--muted)}
+.more{margin-top:24px}
+
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 36px}
+.why b{display:block;font-family:var(--f-display);font-size:22px;font-weight:400;margin-bottom:6px}
+.why p{margin:0;color:var(--muted);font-size:15px}
+
+.contact{background:var(--basalt);color:var(--salt);padding:40px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;margin-top:56px;align-items:end}
+.contact h2{font-family:var(--f-display);font-size:clamp(28px,3.6vw,40px);margin:0 0 12px;line-height:1.1}
+.contact p{margin:0;opacity:.85;max-width:50ch}
+.contact .mail{font-family:var(--f-data);font-size:18px;display:block;margin:0 0 16px;word-break:break-all;user-select:all}
+.contact .btn{background:var(--salt);color:var(--basalt)}
+.contact .btn:hover{background:var(--brine-soft)}
+.copied{font-size:13px;margin-left:10px;opacity:.85}
+
+.foot{padding-block:28px 0;font-size:13px;color:var(--muted);display:grid;gap:8px}
+.foot .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+@media (max-width:980px){
+  .board{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .svcs,.why{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:860px){
+  .hero{padding-block:40px 36px;gap:28px}
+  .hero-row{grid-template-columns:1fr;gap:28px}
+  .table{grid-template-columns:repeat(4,minmax(0,1fr));max-width:420px}
+  .el b{font-size:30px}
+  section{grid-template-columns:1fr;padding-block:40px;gap:6px}
+  .side{padding-top:0}
+  .issue{grid-template-columns:1fr}
+  .issue-side{border-left:0;border-top:1px solid var(--line)}
+  .mkts{grid-template-columns:1fr}
+  .contact{grid-template-columns:1fr;padding:28px 22px;gap:24px}
+}
+@media (max-width:560px){
+  .board{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .svcs,.why{grid-template-columns:1fr}
+  .issue-main,.issue-side{padding:22px}
+}
+@media (prefers-reduced-motion:reduce){.el{transition:none}.el:hover{transform:none}}
+</style>
+
+<style>body{margin:0}</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <div class="brand">
+      <span class="brand-name">Crit<i>Mine</i></span>
+      <span class="brand-tag">Minerales críticos para la transición energética · Latinoamérica</span>
+    </div>
+    <nav aria-label="Secciones del sitio">
+      <a href="index.html" aria-current="page">Inicio</a>
+      <a href="informe-2026-10-05.html">Informes</a>
+      <a href="panel.html">Datos</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="index.html#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Inteligencia de mercado · Cobre · Litio · Tierras raras · Masa negra</p>
+      <h1>Los minerales de la <i>transición energética</i>, leídos desde Latinoamérica</h1>
+    </div>
+    <div class="hero-row">
+      <div>
+        <p>Precios, proyectos, regulación y contrapartes de los cuatro mercados que alimentan la electromovilidad, con cada cifra fechada y citada. Para quien compra, vende o invierte en la región.</p>
+        <div class="ctas">
+          <a class="btn" href="#edicion">Leer la última edición</a>
+          <a class="btn ghost" href="servicios.html">Ver servicios</a>
+        </div>
+      </div>
+      <div class="table" aria-label="Minerales que cubrimos">
+        <a class="el cu" href="#m-cu"><span class="nm"><span>29</span></span><b>Cu</b><span class="nm"><span>Cobre</span><span>63,55</span></span></a>
+        <a class="el" href="#m-li"><span class="nm"><span>3</span></span><b>Li</b><span class="nm"><span>Litio</span><span>6,94</span></span></a>
+        <a class="el" href="#m-nd"><span class="nm"><span>60</span></span><b>Nd</b><span class="nm"><span>Neodimio</span><span>144,2</span></span></a>
+        <a class="el" href="#m-bm"><span class="nm"><span>27</span></span><b>Co</b><span class="nm"><span>Cobalto</span><span>58,93</span></span></a>
+      </div>
+    </div>
+  </div>
+
+  <div id="precios">
+    <div class="board-head"><h2>Tablero de referencia</h2><span>Último dato público de cada producto</span></div>
+    <div class="board" role="list" aria-label="Precios de referencia">
+      <div class="tick" role="listitem" id="t-cu"><span class="lbl">Cobre · LME</span><span class="px">14.309</span><span class="u">US$/t · publicado 9 oct</span><span class="chg dn">▼ 1,15% diario</span></div>
+      <div class="tick" role="listitem"><span class="lbl">Carbonato de litio · GFEX</span><span class="px">119.100</span><span class="u">CNY/t · 30 sep</span><span class="chg dn">▼ aprox. 3,8% semanal</span></div>
+      <div class="tick" role="listitem"><span class="lbl">Espodumeno SC6 · CIF China</span><span class="px">1.735</span><span class="u">US$/t · 29 sep</span><span class="chg dn">▼ 3,1% diario</span></div>
+      <div class="tick" role="listitem"><span class="lbl">Óxido NdPr · China</span><span class="px">738–741k</span><span class="u">CNY/t · 30 sep</span><span class="chg up">▲ 0,2–0,3% semanal</span></div>
+      <div class="tick" role="listitem"><span class="lbl">Masa negra NCM · payable</span><span class="px">72,5–74%</span><span class="u">Ni/Co · China · 28–30 sep</span><span class="chg dn">▼ 1 p.p. mensual</span></div>
+    </div>
+    <p class="board-note">Fuentes: cobre del <a href="panel.html">panel de datos CritMine</a> (Banco Central de Reserva del Perú, se actualiza cada día hábil); resto, SMM. Los precios de China corresponden al cierre previo al feriado del 1 al 7 de octubre. Se actualizan con cada edición.</p>
+  </div>
+
+  <section id="edicion">
+    <div class="side">Última edición</div>
+    <div class="body">
+      <div class="issue">
+        <div class="issue-main">
+          <span class="tag">Informe completo</span>
+          <h3>El litio cae antes del feriado chino; Argentina suma productores y Brasil mueve las tierras raras</h3>
+          <p>5 de octubre de 2026 · periodo 28 sep – 5 oct</p>
+          <ol>
+            <li>GFEX cierra en 119.100 CNY/t, con una baja semanal de cerca de 3,8%</li>
+            <li>POSCO y Rio Tinto inauguran plantas de litio en Catamarca en octubre</li>
+            <li>Sigma Lithium en pausa; Lynas compra Meteoric por US$672M</li>
+          </ol>
+          <div><a class="btn" href="informe-2026-10-05.html">Leer el informe</a></div>
+        </div>
+        <div class="issue-side">
+          <h4>Calendario editorial</h4>
+          <ul class="cal">
+            <li><span class="d">Lunes</span><span>Pulso semanal: precios, noticias clave y oportunidades</span></li>
+            <li><span class="d">Cada 15 días</span><span>Informe completo: proyectos, regulación por país y masa negra</span></li>
+            <li><span class="d">12 oct</span><span>Próximo Pulso</span></li>
+            <li><span class="d">19 oct</span><span>Próximo Informe completo, ya con cobre</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="side">Cuatro mercados</div>
+    <div class="body">
+      <h2>Una sola lectura de la cadena</h2>
+      <p class="lead">El cobre lleva la electricidad, el litio la almacena, las tierras raras la convierten en movimiento y la masa negra devuelve los metales a la cadena. CritMine sigue los cuatro mercados juntos porque se mueven juntos.</p>
+      <div class="mkts">
+        <div class="mkt" id="m-cu">
+          <div class="el cu" aria-hidden="true"><span class="nm"><span>29</span></span><b>Cu</b><span class="nm"><span></span><span>63,55</span></span></div>
+          <div><h3>Cobre</h3><p>El pilar de la minería chilena y peruana, y la base de redes eléctricas, cargadores y motores.</p>
+          <div class="trk">LME · TC/RC de concentrado · Codelco, ENAMI y mediana minería · royalty y permisos<br>CL · PE · MX · AR · BR · EC</div></div>
+        </div>
+        <div class="mkt" id="m-li">
+          <div class="el" aria-hidden="true"><span class="nm"><span>3</span></span><b>Li</b><span class="nm"><span></span><span>6,94</span></span></div>
+          <div><h3>Litio</h3><p>Salmuera en el Triángulo del Litio y roca en Brasil: el mercado con más proyectos nuevos de la región.</p>
+          <div class="trk">Carbonato · hidróxido · SC6 · RIGI · CEOL · Novandino · YLB<br>CL · AR · BO · BR · PE · MX</div></div>
+        </div>
+        <div class="mkt" id="m-nd">
+          <div class="el" aria-hidden="true"><span class="nm"><span>60</span></span><b>Nd</b><span class="nm"><span></span><span>144,2</span></span></div>
+          <div><h3>Tierras raras</h3><p>Neodimio, praseodimio, disprosio y terbio para imanes permanentes. Brasil emerge como alternativa al suministro chino.</p>
+          <div class="trk">Óxido NdPr · DyTb · arcillas iónicas · concentrado mixto<br>BR · CL · AR · PE</div></div>
+        </div>
+        <div class="mkt" id="m-bm">
+          <div class="el" aria-hidden="true"><span class="nm"><span>27</span></span><b>Co</b><span class="nm"><span></span><span>58,93</span></span></div>
+          <div><h3>Masa negra</h3><p>El reciclaje de baterías ion-litio: un mercado incipiente en la región, con reglas nuevas y pocos datos públicos.</p>
+          <div class="trk">Payables de Ni, Co y Li · LFP, NCM, LCO · Ley REP · regla BIS<br>BR · CL · MX · AR · CO</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="side">Servicios</div>
+    <div class="body">
+      <h2>Cuando necesita más que el informe</h2>
+      <div class="svcs">
+        <div><b>Inteligencia de mercado</b><span>Suscripción con precios, alertas y oportunidades.</span></div>
+        <div><b>Entrada a un país</b><span>Estudio de mercado, actores y marco regulatorio.</span></div>
+        <div><b>Due diligence</b><span>Revisión de proyectos y contrapartes antes de firmar.</span></div>
+        <div><b>Mapa de masa negra</b><span>Generadores, recicladores y volúmenes en LATAM.</span></div>
+        <div><b>Análisis regulatorio</b><span>Royalty, RIGI, Estrategia del Litio y política de minerales críticos.</span></div>
+        <div><b>Sesiones estratégicas</b><span>Trabajo directo con su equipo sobre una decisión puntual.</span></div>
+      </div>
+      <div class="more"><a class="btn ghost" href="servicios.html">Ver todos los servicios</a></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="side">Principios</div>
+    <div class="body">
+      <div class="why">
+        <div><b>Neutralidad</b><p>CritMine no representa a ninguna minera ni comprador en sus análisis, y declara cualquier conflicto de interés.</p></div>
+        <div><b>Fuentes a la vista</b><p>Cada cifra lleva fuente y fecha. Sin dato confiable, lo decimos; no estimamos precios.</p></div>
+        <div><b>Mirada comercial</b><p>Escribimos para quien negocia: precios, payables, offtakes y contrapartes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="contact" id="contacto">
+    <div>
+      <h2>Reciba el Pulso cada lunes</h2>
+      <p>Escríbanos para sumarse a la lista de distribución o para pedir una propuesta de servicios.</p>
+    </div>
+    <div>
+      <span class="mail" id="mail">[correo de contacto]</span>
+      <button class="btn" type="button" id="copy">Copiar correo</button><span class="copied" id="copied" hidden>Copiado</span>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <div class="row"><span>CritMine · critmine.com · Medio independiente</span><span>Los análisis de CritMine no son asesoría financiera ni de inversión.</span></div>
+  </footer>
+</div>
+
+<script>
+document.getElementById('copy').addEventListener('click',function(){
+  var el=document.getElementById('mail'), ok=document.getElementById('copied');
+  function sel(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);}
+  try{navigator.clipboard.writeText(el.textContent).then(function(){ok.hidden=false;setTimeout(function(){ok.hidden=true},1800)},sel)}catch(e){sel()}
+});
+
+// Cobre en vivo desde el conector (datos/datos.json)
+fetch('datos/datos.json',{cache:'no-store'}).then(r=>r.json()).then(D=>{
+  const u=D.cobre&&D.cobre.ultimo, m=D.cobre&&D.cobre.mensual; if(!u) return;
+  const MES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const f=x=>x.toLocaleString('es-CL',{maximumFractionDigits:0});
+  const t=document.getElementById('t-cu'); const [y,mo,d]=u.fecha.split('-');
+  t.querySelector('.px').textContent=f(u.valor);
+  t.querySelector('.u').textContent='US$/t · '+(+d)+' '+MES[+mo-1]+' · BCRP';
+  const p=m&&m.length?m[m.length-1]:null, c=t.querySelector('.chg');
+  if(p&&p.fecha!==u.fecha.slice(0,7)){const v=(u.valor/p.valor-1)*100;
+    c.className='chg '+(v>=0?'up':'dn');
+    c.textContent=(v>=0?'▲ ':'▼ ')+Math.abs(v).toLocaleString('es-CL',{maximumFractionDigits:1})+'% vs promedio '+MES[+p.fecha.slice(5)-1];}
+}).catch(()=>{});
+</script>
+
+</body>
+</html>
