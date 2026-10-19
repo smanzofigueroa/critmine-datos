@@ -1,5 +1,5 @@
 {
-  "generado": "2026-10-16T17:33:00+00:00",
+  "generado": "2026-10-19T19:24:30+00:00",
   "fuentes": {
     "bcrp": "Banco Central de Reserva del Perú, estadisticas.bcrp.gob.pe",
     "comtrade": "UN Comtrade, comtradeplus.un.org",
@@ -2130,14 +2130,10 @@
       "nombre": "Dólar observado",
       "unidad": "CLP/US$",
       "ultimo": {
-        "fecha": "2026-10-16",
-        "valor": 984.09
+        "fecha": "2026-10-19",
+        "valor": 981.65
       },
       "serie": [
-        {
-          "fecha": "2025-03-10",
-          "valor": 928.25
-        },
         {
           "fecha": "2025-03-11",
           "valor": 931.13
@@ -3733,6 +3729,10 @@
         {
           "fecha": "2026-10-16",
           "valor": 984.09
+        },
+        {
+          "fecha": "2026-10-19",
+          "valor": 981.65
         }
       ]
     },
@@ -3741,14 +3741,10 @@
       "nombre": "Precio del cobre refinado BML (Banco Central de Chile)",
       "unidad": "US$/lb",
       "ultimo": {
-        "fecha": "2026-10-16",
-        "valor": 6.6212
+        "fecha": "2026-10-19",
+        "valor": 6.5414
       },
       "serie": [
-        {
-          "fecha": "2025-03-10",
-          "valor": 4.4216
-        },
         {
           "fecha": "2025-03-11",
           "valor": 4.3584
@@ -5344,6 +5340,10 @@
         {
           "fecha": "2026-10-16",
           "valor": 6.6212
+        },
+        {
+          "fecha": "2026-10-19",
+          "valor": 6.5414
         }
       ]
     }
