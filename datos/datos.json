@@ -1,5 +1,5 @@
 {
-  "generado": "2026-10-27T18:47:00+00:00",
+  "generado": "2026-10-28T18:57:24+00:00",
   "fuentes": {
     "bcrp": "Banco Central de Reserva del Perú, estadisticas.bcrp.gob.pe",
     "comtrade": "UN Comtrade, comtradeplus.un.org",
@@ -395,6 +395,10 @@
       {
         "fecha": "2026-10-23",
         "valor": 14415.0
+      },
+      {
+        "fecha": "2026-10-26",
+        "valor": 14500.0
       }
     ],
     "mensual": [
@@ -544,10 +548,10 @@
       }
     ],
     "ultimo": {
-      "fecha": "2026-10-23",
-      "valor": 14415.0
+      "fecha": "2026-10-26",
+      "valor": 14500.0
     },
-    "var_semanal_pct": -1.23
+    "var_semanal_pct": 0.03
   },
   "plata": {
     "unidad": "US$/oz troy",
@@ -939,6 +943,10 @@
       {
         "fecha": "2026-10-23",
         "valor": 53.89
+      },
+      {
+        "fecha": "2026-10-26",
+        "valor": 53.93
       }
     ],
     "mensual": [
@@ -1088,10 +1096,10 @@
       }
     ],
     "ultimo": {
-      "fecha": "2026-10-23",
-      "valor": 53.89
+      "fecha": "2026-10-26",
+      "valor": 53.93
     },
-    "var_semanal_pct": -5.46
+    "var_semanal_pct": -5.53
   },
   "oro": {
     "unidad": "US$/oz troy",
@@ -1483,6 +1491,10 @@
       {
         "fecha": "2026-10-23",
         "valor": 3996.1
+      },
+      {
+        "fecha": "2026-10-26",
+        "valor": 4016.71
       }
     ],
     "mensual": [
@@ -1632,10 +1644,10 @@
       }
     ],
     "ultimo": {
-      "fecha": "2026-10-23",
-      "valor": 3996.1
+      "fecha": "2026-10-26",
+      "valor": 4016.71
     },
-    "var_semanal_pct": -4.07
+    "var_semanal_pct": -2.99
   },
   "litio_exportaciones": [
     {
@@ -2100,6 +2112,24 @@
       "precio_unitario_usd_t": 9164
     },
     {
+      "pais": "Perú",
+      "anio": 2025,
+      "hs": "2603",
+      "producto": "Concentrado de cobre",
+      "valor_musd": 25505.8,
+      "toneladas": 10034359,
+      "precio_unitario_usd_t": 2542
+    },
+    {
+      "pais": "Perú",
+      "anio": 2025,
+      "hs": "7403",
+      "producto": "Cobre refinado (cátodos)",
+      "valor_musd": 2280.3,
+      "toneladas": 222692,
+      "precio_unitario_usd_t": 10240
+    },
+    {
       "pais": "Brasil",
       "anio": 2020,
       "hs": "2603",
@@ -2214,14 +2244,10 @@
       "nombre": "Dólar observado",
       "unidad": "CLP/US$",
       "ultimo": {
-        "fecha": "2026-10-27",
-        "valor": 994.29
+        "fecha": "2026-10-28",
+        "valor": 985.14
       },
       "serie": [
-        {
-          "fecha": "2025-03-19",
-          "valor": 917.97
-        },
         {
           "fecha": "2025-03-20",
           "valor": 917.76
@@ -3817,6 +3843,10 @@
         {
           "fecha": "2026-10-27",
           "valor": 994.29
+        },
+        {
+          "fecha": "2026-10-28",
+          "valor": 985.14
         }
       ]
     },
@@ -3825,14 +3855,10 @@
       "nombre": "Precio del cobre refinado BML (Banco Central de Chile)",
       "unidad": "US$/lb",
       "ultimo": {
-        "fecha": "2026-10-27",
-        "valor": 6.5644
+        "fecha": "2026-10-28",
+        "valor": 6.5838
       },
       "serie": [
-        {
-          "fecha": "2025-03-19",
-          "valor": 4.4449
-        },
         {
           "fecha": "2025-03-20",
           "valor": 4.4692
@@ -5428,6 +5454,10 @@
         {
           "fecha": "2026-10-27",
           "valor": 6.5644
+        },
+        {
+          "fecha": "2026-10-28",
+          "valor": 6.5838
         }
       ]
     }
