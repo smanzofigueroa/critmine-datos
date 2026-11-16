@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-13T20:32:50+00:00",
+  "generado": "2026-11-16T22:58:11+00:00",
   "fuentes": {
     "bcrp": "Banco Central de Reserva del Perú, estadisticas.bcrp.gob.pe",
     "comtrade": "UN Comtrade, comtradeplus.un.org",
@@ -443,6 +443,14 @@
       {
         "fecha": "2026-11-10",
         "valor": 13992.0
+      },
+      {
+        "fecha": "2026-11-11",
+        "valor": 13875.5
+      },
+      {
+        "fecha": "2026-11-12",
+        "valor": 13712.0
       }
     ],
     "mensual": [
@@ -596,10 +604,10 @@
       }
     ],
     "ultimo": {
-      "fecha": "2026-11-10",
-      "valor": 13992.0
+      "fecha": "2026-11-12",
+      "valor": 13712.0
     },
-    "var_semanal_pct": -0.84
+    "var_semanal_pct": -2.82
   },
   "plata": {
     "unidad": "US$/oz troy",
@@ -1039,6 +1047,14 @@
       {
         "fecha": "2026-11-10",
         "valor": 51.51
+      },
+      {
+        "fecha": "2026-11-11",
+        "valor": 51.69
+      },
+      {
+        "fecha": "2026-11-12",
+        "valor": 50.01
       }
     ],
     "mensual": [
@@ -1192,10 +1208,10 @@
       }
     ],
     "ultimo": {
-      "fecha": "2026-11-10",
-      "valor": 51.51
+      "fecha": "2026-11-12",
+      "valor": 50.01
     },
-    "var_semanal_pct": 3.48
+    "var_semanal_pct": -3.37
   },
   "oro": {
     "unidad": "US$/oz troy",
@@ -1635,6 +1651,14 @@
       {
         "fecha": "2026-11-10",
         "valor": 4032.83
+      },
+      {
+        "fecha": "2026-11-11",
+        "valor": 3987.9
+      },
+      {
+        "fecha": "2026-11-12",
+        "valor": 3877.07
       }
     ],
     "mensual": [
@@ -1788,10 +1812,10 @@
       }
     ],
     "ultimo": {
-      "fecha": "2026-11-10",
-      "valor": 4032.83
+      "fecha": "2026-11-12",
+      "valor": 3877.07
     },
-    "var_semanal_pct": 2.62
+    "var_semanal_pct": -5.16
   },
   "litio_exportaciones": [
     {
@@ -2388,14 +2412,10 @@
       "nombre": "Dólar observado",
       "unidad": "CLP/US$",
       "ultimo": {
-        "fecha": "2026-11-13",
-        "valor": 992.48
+        "fecha": "2026-11-16",
+        "valor": 999.1
       },
       "serie": [
-        {
-          "fecha": "2025-04-07",
-          "valor": 975.82
-        },
         {
           "fecha": "2025-04-08",
           "valor": 990.68
@@ -3991,6 +4011,10 @@
         {
           "fecha": "2026-11-13",
           "valor": 992.48
+        },
+        {
+          "fecha": "2026-11-16",
+          "valor": 999.1
         }
       ]
     },
@@ -3999,14 +4023,10 @@
       "nombre": "Precio del cobre refinado BML (Banco Central de Chile)",
       "unidad": "US$/lb",
       "ultimo": {
-        "fecha": "2026-11-13",
-        "valor": 6.3007
+        "fecha": "2026-11-16",
+        "valor": 6.188
       },
       "serie": [
-        {
-          "fecha": "2025-04-07",
-          "valor": 4.2272
-        },
         {
           "fecha": "2025-04-08",
           "valor": 3.954
@@ -5602,6 +5622,10 @@
         {
           "fecha": "2026-11-13",
           "valor": 6.3007
+        },
+        {
+          "fecha": "2026-11-16",
+          "valor": 6.188
         }
       ]
     }
