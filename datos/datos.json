@@ -1,5 +1,5 @@
 {
-  "generado": "2026-11-24T01:01:55+00:00",
+  "generado": "2026-11-24T23:06:38+00:00",
   "fuentes": {
     "bcrp": "Banco Central de Reserva del Perú, estadisticas.bcrp.gob.pe",
     "comtrade": "UN Comtrade, comtradeplus.un.org",
@@ -459,6 +459,26 @@
       {
         "fecha": "2026-11-16",
         "valor": 13375.0
+      },
+      {
+        "fecha": "2026-11-17",
+        "valor": 13225.5
+      },
+      {
+        "fecha": "2026-11-18",
+        "valor": 12750.0
+      },
+      {
+        "fecha": "2026-11-19",
+        "valor": 12570.0
+      },
+      {
+        "fecha": "2026-11-20",
+        "valor": 12230.5
+      },
+      {
+        "fecha": "2026-11-23",
+        "valor": 12165.0
       }
     ],
     "mensual": [
@@ -612,10 +632,10 @@
       }
     ],
     "ultimo": {
-      "fecha": "2026-11-16",
-      "valor": 13375.0
+      "fecha": "2026-11-23",
+      "valor": 12165.0
     },
-    "var_semanal_pct": -4.67
+    "var_semanal_pct": -9.05
   },
   "plata": {
     "unidad": "US$/oz troy",
@@ -1071,6 +1091,26 @@
       {
         "fecha": "2026-11-16",
         "valor": 47.01
+      },
+      {
+        "fecha": "2026-11-17",
+        "valor": 47.4
+      },
+      {
+        "fecha": "2026-11-18",
+        "valor": 45.02
+      },
+      {
+        "fecha": "2026-11-19",
+        "valor": 42.74
+      },
+      {
+        "fecha": "2026-11-20",
+        "valor": 41.18
+      },
+      {
+        "fecha": "2026-11-23",
+        "valor": 43.06
       }
     ],
     "mensual": [
@@ -1224,10 +1264,10 @@
       }
     ],
     "ultimo": {
-      "fecha": "2026-11-16",
-      "valor": 47.01
+      "fecha": "2026-11-23",
+      "valor": 43.06
     },
-    "var_semanal_pct": -11.97
+    "var_semanal_pct": -8.41
   },
   "oro": {
     "unidad": "US$/oz troy",
@@ -1683,6 +1723,26 @@
       {
         "fecha": "2026-11-16",
         "valor": 3856.46
+      },
+      {
+        "fecha": "2026-11-17",
+        "valor": 3849.63
+      },
+      {
+        "fecha": "2026-11-18",
+        "valor": 3725.38
+      },
+      {
+        "fecha": "2026-11-19",
+        "valor": 3625.47
+      },
+      {
+        "fecha": "2026-11-20",
+        "valor": 3538.49
+      },
+      {
+        "fecha": "2026-11-23",
+        "valor": 3634.58
       }
     ],
     "mensual": [
@@ -1836,10 +1896,10 @@
       }
     ],
     "ultimo": {
-      "fecha": "2026-11-16",
-      "valor": 3856.46
+      "fecha": "2026-11-23",
+      "valor": 3634.58
     },
-    "var_semanal_pct": -6.84
+    "var_semanal_pct": -5.75
   },
   "litio_exportaciones": [
     {
